@@ -1,0 +1,22 @@
+{
+	"FileVersion": 3,
+	"EngineAssociation": "{BDB92963-4254-CCD7-EC11-EFB7136B7391}",
+	"Category": "",
+	"Description": "",
+	"Modules": [
+		{
+			"Name": "ClipmapTerrain",
+			"Type": "Runtime",
+			"LoadingPhase": "Default"
+		}
+	],
+	"Plugins": [
+		{
+			"Name": "ModelingToolsEditorMode",
+			"Enabled": true,
+			"TargetAllowList": [
+				"Editor"
+			]
+		}
+	]
+}

@@ -1,0 +1,1463 @@
+<Solution>
+  <Configurations>
+    <BuildType Name="Debug" />
+    <BuildType Name="Debug Client" />
+    <BuildType Name="Debug Editor" />
+    <BuildType Name="Debug Server" />
+    <BuildType Name="DebugGame" />
+    <BuildType Name="DebugGame Client" />
+    <BuildType Name="DebugGame Editor" />
+    <BuildType Name="DebugGame Server" />
+    <BuildType Name="Development" />
+    <BuildType Name="Development Client" />
+    <BuildType Name="Development Editor" />
+    <BuildType Name="Development Server" />
+    <BuildType Name="Shipping" />
+    <BuildType Name="Shipping Client" />
+    <BuildType Name="Shipping Server" />
+    <BuildType Name="Test" />
+    <BuildType Name="Test Client" />
+    <BuildType Name="Test Server" />
+    <Platform Name="Android" />
+    <Platform Name="Android-arm64" />
+    <Platform Name="Android-x64" />
+    <Platform Name="Linux" />
+    <Platform Name="LinuxArm64" />
+    <Platform Name="Win64" />
+    <Platform Name="Win64-arm64" />
+    <Platform Name="Win64-arm64ec" />
+  </Configurations>
+  <Folder Name="/Engine/">
+    <Project Path="Intermediate/ProjectFiles/UE5.vcxproj" Id="d6734bd8-520c-3a27-b572-12a6d0defd6e">
+      <BuildType Solution="Debug Client|Android" Project="Debug_Client" />
+      <BuildType Solution="Debug Client|Android-arm64" Project="Debug_Client" />
+      <BuildType Solution="Debug Client|Android-x64" Project="Debug_Client" />
+      <BuildType Solution="Debug Client|Linux" Project="Linux_Debug_Client" />
+      <BuildType Solution="Debug Client|LinuxArm64" Project="LinuxArm64_Debug_Client" />
+      <BuildType Solution="Debug Client|Win64" Project="Debug_Client" />
+      <BuildType Solution="Debug Client|Win64-arm64" Project="Win64_arm64_Debug_Client" />
+      <BuildType Solution="Debug Client|Win64-arm64ec" Project="Win64_arm64ec_Debug_Client" />
+      <BuildType Solution="Debug Editor|Android" Project="Invalid" />
+      <BuildType Solution="Debug Editor|Android-arm64" Project="Invalid" />
+      <BuildType Solution="Debug Editor|Android-x64" Project="Invalid" />
+      <BuildType Solution="Debug Editor|Linux" Project="Linux_Debug_Editor" />
+      <BuildType Solution="Debug Editor|LinuxArm64" Project="Invalid" />
+      <BuildType Solution="Debug Editor|Win64" Project="Debug_Editor" />
+      <BuildType Solution="Debug Editor|Win64-arm64" Project="Win64_arm64_Debug_Editor" />
+      <BuildType Solution="Debug Editor|Win64-arm64ec" Project="Win64_arm64ec_Debug_Editor" />
+      <BuildType Solution="Debug Server|Android" Project="Invalid" />
+      <BuildType Solution="Debug Server|Android-arm64" Project="Invalid" />
+      <BuildType Solution="Debug Server|Android-x64" Project="Invalid" />
+      <BuildType Solution="Debug Server|Linux" Project="Linux_Debug_Server" />
+      <BuildType Solution="Debug Server|LinuxArm64" Project="LinuxArm64_Debug_Server" />
+      <BuildType Solution="Debug Server|Win64" Project="Debug_Server" />
+      <BuildType Solution="Debug Server|Win64-arm64" Project="Win64_arm64_Debug_Server" />
+      <BuildType Solution="Debug Server|Win64-arm64ec" Project="Win64_arm64ec_Debug_Server" />
+      <BuildType Solution="DebugGame Client|Android" Project="DebugGame_Client" />
+      <BuildType Solution="DebugGame Client|Android-arm64" Project="DebugGame_Client" />
+      <BuildType Solution="DebugGame Client|Android-x64" Project="DebugGame_Client" />
+      <BuildType Solution="DebugGame Client|Linux" Project="Linux_DebugGame_Client" />
+      <BuildType Solution="DebugGame Client|LinuxArm64" Project="LinuxArm64_DebugGame_Client" />
+      <BuildType Solution="DebugGame Client|Win64" Project="DebugGame_Client" />
+      <BuildType Solution="DebugGame Client|Win64-arm64" Project="Win64_arm64_DebugGame_Client" />
+      <BuildType Solution="DebugGame Client|Win64-arm64ec" Project="Win64_arm64ec_DebugGame_Client" />
+      <BuildType Solution="DebugGame Editor|Android" Project="Invalid" />
+      <BuildType Solution="DebugGame Editor|Android-arm64" Project="Invalid" />
+      <BuildType Solution="DebugGame Editor|Android-x64" Project="Invalid" />
+      <BuildType Solution="DebugGame Editor|Linux" Project="Linux_DebugGame_Editor" />
+      <BuildType Solution="DebugGame Editor|LinuxArm64" Project="Invalid" />
+      <BuildType Solution="DebugGame Editor|Win64" Project="DebugGame_Editor" />
+      <BuildType Solution="DebugGame Editor|Win64-arm64" Project="Win64_arm64_DebugGame_Editor" />
+      <BuildType Solution="DebugGame Editor|Win64-arm64ec" Project="Win64_arm64ec_DebugGame_Editor" />
+      <BuildType Solution="DebugGame Server|Android" Project="Invalid" />
+      <BuildType Solution="DebugGame Server|Android-arm64" Project="Invalid" />
+      <BuildType Solution="DebugGame Server|Android-x64" Project="Invalid" />
+      <BuildType Solution="DebugGame Server|Linux" Project="Linux_DebugGame_Server" />
+      <BuildType Solution="DebugGame Server|LinuxArm64" Project="LinuxArm64_DebugGame_Server" />
+      <BuildType Solution="DebugGame Server|Win64" Project="DebugGame_Server" />
+      <BuildType Solution="DebugGame Server|Win64-arm64" Project="Win64_arm64_DebugGame_Server" />
+      <BuildType Solution="DebugGame Server|Win64-arm64ec" Project="Win64_arm64ec_DebugGame_Server" />
+      <BuildType Solution="DebugGame|Linux" Project="Linux_DebugGame" />
+      <BuildType Solution="DebugGame|LinuxArm64" Project="LinuxArm64_DebugGame" />
+      <BuildType Solution="DebugGame|Win64-arm64" Project="Win64_arm64_DebugGame" />
+      <BuildType Solution="DebugGame|Win64-arm64ec" Project="Win64_arm64ec_DebugGame" />
+      <BuildType Solution="Debug|Linux" Project="Linux_Debug" />
+      <BuildType Solution="Debug|LinuxArm64" Project="LinuxArm64_Debug" />
+      <BuildType Solution="Debug|Win64-arm64" Project="Win64_arm64_Debug" />
+      <BuildType Solution="Debug|Win64-arm64ec" Project="Win64_arm64ec_Debug" />
+      <BuildType Solution="Development Client|Android" Project="Development_Client" />
+      <BuildType Solution="Development Client|Android-arm64" Project="Development_Client" />
+      <BuildType Solution="Development Client|Android-x64" Project="Development_Client" />
+      <BuildType Solution="Development Client|Linux" Project="Linux_Development_Client" />
+      <BuildType Solution="Development Client|LinuxArm64" Project="LinuxArm64_Development_Client" />
+      <BuildType Solution="Development Client|Win64" Project="Development_Client" />
+      <BuildType Solution="Development Client|Win64-arm64" Project="Win64_arm64_Development_Client" />
+      <BuildType Solution="Development Client|Win64-arm64ec" Project="Win64_arm64ec_Development_Client" />
+      <BuildType Solution="Development Editor|Android" Project="Invalid" />
+      <BuildType Solution="Development Editor|Android-arm64" Project="Invalid" />
+      <BuildType Solution="Development Editor|Android-x64" Project="Invalid" />
+      <BuildType Solution="Development Editor|Linux" Project="Linux_Development_Editor" />
+      <BuildType Solution="Development Editor|LinuxArm64" Project="Invalid" />
+      <BuildType Solution="Development Editor|Win64" Project="Development_Editor" />
+      <BuildType Solution="Development Editor|Win64-arm64" Project="Win64_arm64_Development_Editor" />
+      <BuildType Solution="Development Editor|Win64-arm64ec" Project="Win64_arm64ec_Development_Editor" />
+      <BuildType Solution="Development Server|Android" Project="Invalid" />
+      <BuildType Solution="Development Server|Android-arm64" Project="Invalid" />
+      <BuildType Solution="Development Server|Android-x64" Project="Invalid" />
+      <BuildType Solution="Development Server|Linux" Project="Linux_Development_Server" />
+      <BuildType Solution="Development Server|LinuxArm64" Project="LinuxArm64_Development_Server" />
+      <BuildType Solution="Development Server|Win64" Project="Development_Server" />
+      <BuildType Solution="Development Server|Win64-arm64" Project="Win64_arm64_Development_Server" />
+      <BuildType Solution="Development Server|Win64-arm64ec" Project="Win64_arm64ec_Development_Server" />
+      <BuildType Solution="Development|Linux" Project="Linux_Development" />
+      <BuildType Solution="Development|LinuxArm64" Project="LinuxArm64_Development" />
+      <BuildType Solution="Development|Win64-arm64" Project="Win64_arm64_Development" />
+      <BuildType Solution="Development|Win64-arm64ec" Project="Win64_arm64ec_Development" />
+      <BuildType Solution="Shipping Client|Android" Project="Shipping_Client" />
+      <BuildType Solution="Shipping Client|Android-arm64" Project="Shipping_Client" />
+      <BuildType Solution="Shipping Client|Android-x64" Project="Shipping_Client" />
+      <BuildType Solution="Shipping Client|Linux" Project="Linux_Shipping_Client" />
+      <BuildType Solution="Shipping Client|LinuxArm64" Project="LinuxArm64_Shipping_Client" />
+      <BuildType Solution="Shipping Client|Win64" Project="Shipping_Client" />
+      <BuildType Solution="Shipping Client|Win64-arm64" Project="Win64_arm64_Shipping_Client" />
+      <BuildType Solution="Shipping Client|Win64-arm64ec" Project="Win64_arm64ec_Shipping_Client" />
+      <BuildType Solution="Shipping Server|Android" Project="Invalid" />
+      <BuildType Solution="Shipping Server|Android-arm64" Project="Invalid" />
+      <BuildType Solution="Shipping Server|Android-x64" Project="Invalid" />
+      <BuildType Solution="Shipping Server|Linux" Project="Linux_Shipping_Server" />
+      <BuildType Solution="Shipping Server|LinuxArm64" Project="LinuxArm64_Shipping_Server" />
+      <BuildType Solution="Shipping Server|Win64" Project="Shipping_Server" />
+      <BuildType Solution="Shipping Server|Win64-arm64" Project="Win64_arm64_Shipping_Server" />
+      <BuildType Solution="Shipping Server|Win64-arm64ec" Project="Win64_arm64ec_Shipping_Server" />
+      <BuildType Solution="Shipping|Linux" Project="Linux_Shipping" />
+      <BuildType Solution="Shipping|LinuxArm64" Project="LinuxArm64_Shipping" />
+      <BuildType Solution="Shipping|Win64-arm64" Project="Win64_arm64_Shipping" />
+      <BuildType Solution="Shipping|Win64-arm64ec" Project="Win64_arm64ec_Shipping" />
+      <BuildType Solution="Test Client|Android" Project="Test_Client" />
+      <BuildType Solution="Test Client|Android-arm64" Project="Test_Client" />
+      <BuildType Solution="Test Client|Android-x64" Project="Test_Client" />
+      <BuildType Solution="Test Client|Linux" Project="Linux_Test_Client" />
+      <BuildType Solution="Test Client|LinuxArm64" Project="LinuxArm64_Test_Client" />
+      <BuildType Solution="Test Client|Win64" Project="Test_Client" />
+      <BuildType Solution="Test Client|Win64-arm64" Project="Win64_arm64_Test_Client" />
+      <BuildType Solution="Test Client|Win64-arm64ec" Project="Win64_arm64ec_Test_Client" />
+      <BuildType Solution="Test Server|Android" Project="Invalid" />
+      <BuildType Solution="Test Server|Android-arm64" Project="Invalid" />
+      <BuildType Solution="Test Server|Android-x64" Project="Invalid" />
+      <BuildType Solution="Test Server|Linux" Project="Linux_Test_Server" />
+      <BuildType Solution="Test Server|LinuxArm64" Project="LinuxArm64_Test_Server" />
+      <BuildType Solution="Test Server|Win64" Project="Test_Server" />
+      <BuildType Solution="Test Server|Win64-arm64" Project="Win64_arm64_Test_Server" />
+      <BuildType Solution="Test Server|Win64-arm64ec" Project="Win64_arm64ec_Test_Server" />
+      <BuildType Solution="Test|Linux" Project="Linux_Test" />
+      <BuildType Solution="Test|LinuxArm64" Project="LinuxArm64_Test" />
+      <BuildType Solution="Test|Win64-arm64" Project="Win64_arm64_Test" />
+      <BuildType Solution="Test|Win64-arm64ec" Project="Win64_arm64ec_Test" />
+      <Platform Solution="*|Linux" Project="x64" />
+      <Platform Solution="*|LinuxArm64" Project="x64" />
+      <Platform Solution="*|Win64" Project="x64" />
+      <Platform Solution="*|Win64-arm64" Project="x64" />
+      <Platform Solution="*|Win64-arm64ec" Project="x64" />
+      <Platform Solution="Debug Client|Android" Project="Android-arm64-v8a" />
+      <Platform Solution="Debug Client|Android-arm64" Project="Android-arm64-v8a" />
+      <Platform Solution="Debug Client|Android-x64" Project="Android-x86_64" />
+      <Platform Solution="Debug Editor|Android" Project="x64" />
+      <Platform Solution="Debug Editor|Android-arm64" Project="x64" />
+      <Platform Solution="Debug Editor|Android-x64" Project="x64" />
+      <Platform Solution="Debug Server|Android" Project="x64" />
+      <Platform Solution="Debug Server|Android-arm64" Project="x64" />
+      <Platform Solution="Debug Server|Android-x64" Project="x64" />
+      <Platform Solution="DebugGame Client|Android" Project="Android-arm64-v8a" />
+      <Platform Solution="DebugGame Client|Android-arm64" Project="Android-arm64-v8a" />
+      <Platform Solution="DebugGame Client|Android-x64" Project="Android-x86_64" />
+      <Platform Solution="DebugGame Editor|Android" Project="x64" />
+      <Platform Solution="DebugGame Editor|Android-arm64" Project="x64" />
+      <Platform Solution="DebugGame Editor|Android-x64" Project="x64" />
+      <Platform Solution="DebugGame Server|Android" Project="x64" />
+      <Platform Solution="DebugGame Server|Android-arm64" Project="x64" />
+      <Platform Solution="DebugGame Server|Android-x64" Project="x64" />
+      <Platform Solution="DebugGame|Android" Project="Android-arm64-v8a" />
+      <Platform Solution="DebugGame|Android-arm64" Project="Android-arm64-v8a" />
+      <Platform Solution="DebugGame|Android-x64" Project="Android-x86_64" />
+      <Platform Solution="Debug|Android" Project="Android-arm64-v8a" />
+      <Platform Solution="Debug|Android-arm64" Project="Android-arm64-v8a" />
+      <Platform Solution="Debug|Android-x64" Project="Android-x86_64" />
+      <Platform Solution="Development Client|Android" Project="Android-arm64-v8a" />
+      <Platform Solution="Development Client|Android-arm64" Project="Android-arm64-v8a" />
+      <Platform Solution="Development Client|Android-x64" Project="Android-x86_64" />
+      <Platform Solution="Development Editor|Android" Project="x64" />
+      <Platform Solution="Development Editor|Android-arm64" Project="x64" />
+      <Platform Solution="Development Editor|Android-x64" Project="x64" />
+      <Platform Solution="Development Server|Android" Project="x64" />
+      <Platform Solution="Development Server|Android-arm64" Project="x64" />
+      <Platform Solution="Development Server|Android-x64" Project="x64" />
+      <Platform Solution="Development|Android" Project="Android-arm64-v8a" />
+      <Platform Solution="Development|Android-arm64" Project="Android-arm64-v8a" />
+      <Platform Solution="Development|Android-x64" Project="Android-x86_64" />
+      <Platform Solution="Shipping Client|Android" Project="Android-arm64-v8a" />
+      <Platform Solution="Shipping Client|Android-arm64" Project="Android-arm64-v8a" />
+      <Platform Solution="Shipping Client|Android-x64" Project="Android-x86_64" />
+      <Platform Solution="Shipping Server|Android" Project="x64" />
+      <Platform Solution="Shipping Server|Android-arm64" Project="x64" />
+      <Platform Solution="Shipping Server|Android-x64" Project="x64" />
+      <Platform Solution="Shipping|Android" Project="Android-arm64-v8a" />
+      <Platform Solution="Shipping|Android-arm64" Project="Android-arm64-v8a" />
+      <Platform Solution="Shipping|Android-x64" Project="Android-x86_64" />
+      <Platform Solution="Test Client|Android" Project="Android-arm64-v8a" />
+      <Platform Solution="Test Client|Android-arm64" Project="Android-arm64-v8a" />
+      <Platform Solution="Test Client|Android-x64" Project="Android-x86_64" />
+      <Platform Solution="Test Server|Android" Project="x64" />
+      <Platform Solution="Test Server|Android-arm64" Project="x64" />
+      <Platform Solution="Test Server|Android-x64" Project="x64" />
+      <Platform Solution="Test|Android" Project="Android-arm64-v8a" />
+      <Platform Solution="Test|Android-arm64" Project="Android-arm64-v8a" />
+      <Platform Solution="Test|Android-x64" Project="Android-x86_64" />
+      <Build Solution="Debug Editor|Android" Project="false" />
+      <Build Solution="Debug Editor|Android-arm64" Project="false" />
+      <Build Solution="Debug Editor|Android-x64" Project="false" />
+      <Build Solution="Debug Editor|LinuxArm64" Project="false" />
+      <Build Solution="Debug Server|Android" Project="false" />
+      <Build Solution="Debug Server|Android-arm64" Project="false" />
+      <Build Solution="Debug Server|Android-x64" Project="false" />
+      <Build Solution="DebugGame Editor|Android" Project="false" />
+      <Build Solution="DebugGame Editor|Android-arm64" Project="false" />
+      <Build Solution="DebugGame Editor|Android-x64" Project="false" />
+      <Build Solution="DebugGame Editor|LinuxArm64" Project="false" />
+      <Build Solution="DebugGame Server|Android" Project="false" />
+      <Build Solution="DebugGame Server|Android-arm64" Project="false" />
+      <Build Solution="DebugGame Server|Android-x64" Project="false" />
+      <Build Solution="Development Editor|Android" Project="false" />
+      <Build Solution="Development Editor|Android-arm64" Project="false" />
+      <Build Solution="Development Editor|Android-x64" Project="false" />
+      <Build Solution="Development Editor|LinuxArm64" Project="false" />
+      <Build Solution="Development Server|Android" Project="false" />
+      <Build Solution="Development Server|Android-arm64" Project="false" />
+      <Build Solution="Development Server|Android-x64" Project="false" />
+      <Build Solution="Shipping Server|Android" Project="false" />
+      <Build Solution="Shipping Server|Android-arm64" Project="false" />
+      <Build Solution="Shipping Server|Android-x64" Project="false" />
+      <Build Solution="Test Server|Android" Project="false" />
+      <Build Solution="Test Server|Android-arm64" Project="false" />
+      <Build Solution="Test Server|Android-x64" Project="false" />
+    </Project>
+  </Folder>
+  <Folder Name="/Games/">
+    <Project Path="Intermediate/ProjectFiles/ClipmapTerrain.vcxproj" Id="740f7293-ea40-3221-88ee-af3783868a3b">
+      <BuildType Solution="Debug Client|*" Project="Invalid" />
+      <BuildType Solution="Debug Editor|Android" Project="Invalid" />
+      <BuildType Solution="Debug Editor|Android-arm64" Project="Invalid" />
+      <BuildType Solution="Debug Editor|Android-x64" Project="Invalid" />
+      <BuildType Solution="Debug Editor|Linux" Project="Linux_Debug_Editor" />
+      <BuildType Solution="Debug Editor|LinuxArm64" Project="Invalid" />
+      <BuildType Solution="Debug Editor|Win64" Project="Debug_Editor" />
+      <BuildType Solution="Debug Editor|Win64-arm64" Project="Win64_arm64_Debug_Editor" />
+      <BuildType Solution="Debug Editor|Win64-arm64ec" Project="Win64_arm64ec_Debug_Editor" />
+      <BuildType Solution="Debug Server|*" Project="Invalid" />
+      <BuildType Solution="DebugGame Client|*" Project="Invalid" />
+      <BuildType Solution="DebugGame Editor|Android" Project="Invalid" />
+      <BuildType Solution="DebugGame Editor|Android-arm64" Project="Invalid" />
+      <BuildType Solution="DebugGame Editor|Android-x64" Project="Invalid" />
+      <BuildType Solution="DebugGame Editor|Linux" Project="Linux_DebugGame_Editor" />
+      <BuildType Solution="DebugGame Editor|LinuxArm64" Project="Invalid" />
+      <BuildType Solution="DebugGame Editor|Win64" Project="DebugGame_Editor" />
+      <BuildType Solution="DebugGame Editor|Win64-arm64" Project="Win64_arm64_DebugGame_Editor" />
+      <BuildType Solution="DebugGame Editor|Win64-arm64ec" Project="Win64_arm64ec_DebugGame_Editor" />
+      <BuildType Solution="DebugGame Server|*" Project="Invalid" />
+      <BuildType Solution="DebugGame|Linux" Project="Linux_DebugGame" />
+      <BuildType Solution="DebugGame|LinuxArm64" Project="LinuxArm64_DebugGame" />
+      <BuildType Solution="DebugGame|Win64-arm64" Project="Win64_arm64_DebugGame" />
+      <BuildType Solution="DebugGame|Win64-arm64ec" Project="Win64_arm64ec_DebugGame" />
+      <BuildType Solution="Debug|Linux" Project="Linux_Debug" />
+      <BuildType Solution="Debug|LinuxArm64" Project="LinuxArm64_Debug" />
+      <BuildType Solution="Debug|Win64-arm64" Project="Win64_arm64_Debug" />
+      <BuildType Solution="Debug|Win64-arm64ec" Project="Win64_arm64ec_Debug" />
+      <BuildType Solution="Development Client|*" Project="Invalid" />
+      <BuildType Solution="Development Editor|Android" Project="Invalid" />
+      <BuildType Solution="Development Editor|Android-arm64" Project="Invalid" />
+      <BuildType Solution="Development Editor|Android-x64" Project="Invalid" />
+      <BuildType Solution="Development Editor|Linux" Project="Linux_Development_Editor" />
+      <BuildType Solution="Development Editor|LinuxArm64" Project="Invalid" />
+      <BuildType Solution="Development Editor|Win64" Project="Development_Editor" />
+      <BuildType Solution="Development Editor|Win64-arm64" Project="Win64_arm64_Development_Editor" />
+      <BuildType Solution="Development Editor|Win64-arm64ec" Project="Win64_arm64ec_Development_Editor" />
+      <BuildType Solution="Development Server|*" Project="Invalid" />
+      <BuildType Solution="Development|Linux" Project="Linux_Development" />
+      <BuildType Solution="Development|LinuxArm64" Project="LinuxArm64_Development" />
+      <BuildType Solution="Development|Win64-arm64" Project="Win64_arm64_Development" />
+      <BuildType Solution="Development|Win64-arm64ec" Project="Win64_arm64ec_Development" />
+      <BuildType Solution="Shipping Client|*" Project="Invalid" />
+      <BuildType Solution="Shipping Server|*" Project="Invalid" />
+      <BuildType Solution="Shipping|Linux" Project="Linux_Shipping" />
+      <BuildType Solution="Shipping|LinuxArm64" Project="LinuxArm64_Shipping" />
+      <BuildType Solution="Shipping|Win64-arm64" Project="Win64_arm64_Shipping" />
+      <BuildType Solution="Shipping|Win64-arm64ec" Project="Win64_arm64ec_Shipping" />
+      <BuildType Solution="Test Client|*" Project="Invalid" />
+      <BuildType Solution="Test Server|*" Project="Invalid" />
+      <BuildType Solution="Test|Linux" Project="Linux_Test" />
+      <BuildType Solution="Test|LinuxArm64" Project="LinuxArm64_Test" />
+      <BuildType Solution="Test|Win64-arm64" Project="Win64_arm64_Test" />
+      <BuildType Solution="Test|Win64-arm64ec" Project="Win64_arm64ec_Test" />
+      <Platform Solution="*|Linux" Project="x64" />
+      <Platform Solution="*|LinuxArm64" Project="x64" />
+      <Platform Solution="*|Win64" Project="x64" />
+      <Platform Solution="*|Win64-arm64" Project="x64" />
+      <Platform Solution="*|Win64-arm64ec" Project="x64" />
+      <Platform Solution="Debug Client|Android" Project="x64" />
+      <Platform Solution="Debug Client|Android-arm64" Project="x64" />
+      <Platform Solution="Debug Client|Android-x64" Project="x64" />
+      <Platform Solution="Debug Editor|Android" Project="x64" />
+      <Platform Solution="Debug Editor|Android-arm64" Project="x64" />
+      <Platform Solution="Debug Editor|Android-x64" Project="x64" />
+      <Platform Solution="Debug Server|Android" Project="x64" />
+      <Platform Solution="Debug Server|Android-arm64" Project="x64" />
+      <Platform Solution="Debug Server|Android-x64" Project="x64" />
+      <Platform Solution="DebugGame Client|Android" Project="x64" />
+      <Platform Solution="DebugGame Client|Android-arm64" Project="x64" />
+      <Platform Solution="DebugGame Client|Android-x64" Project="x64" />
+      <Platform Solution="DebugGame Editor|Android" Project="x64" />
+      <Platform Solution="DebugGame Editor|Android-arm64" Project="x64" />
+      <Platform Solution="DebugGame Editor|Android-x64" Project="x64" />
+      <Platform Solution="DebugGame Server|Android" Project="x64" />
+      <Platform Solution="DebugGame Server|Android-arm64" Project="x64" />
+      <Platform Solution="DebugGame Server|Android-x64" Project="x64" />
+      <Platform Solution="DebugGame|Android" Project="Android-arm64-v8a" />
+      <Platform Solution="DebugGame|Android-arm64" Project="Android-arm64-v8a" />
+      <Platform Solution="DebugGame|Android-x64" Project="Android-x86_64" />
+      <Platform Solution="Debug|Android" Project="Android-arm64-v8a" />
+      <Platform Solution="Debug|Android-arm64" Project="Android-arm64-v8a" />
+      <Platform Solution="Debug|Android-x64" Project="Android-x86_64" />
+      <Platform Solution="Development Client|Android" Project="x64" />
+      <Platform Solution="Development Client|Android-arm64" Project="x64" />
+      <Platform Solution="Development Client|Android-x64" Project="x64" />
+      <Platform Solution="Development Editor|Android" Project="x64" />
+      <Platform Solution="Development Editor|Android-arm64" Project="x64" />
+      <Platform Solution="Development Editor|Android-x64" Project="x64" />
+      <Platform Solution="Development Server|Android" Project="x64" />
+      <Platform Solution="Development Server|Android-arm64" Project="x64" />
+      <Platform Solution="Development Server|Android-x64" Project="x64" />
+      <Platform Solution="Development|Android" Project="Android-arm64-v8a" />
+      <Platform Solution="Development|Android-arm64" Project="Android-arm64-v8a" />
+      <Platform Solution="Development|Android-x64" Project="Android-x86_64" />
+      <Platform Solution="Shipping Client|Android" Project="x64" />
+      <Platform Solution="Shipping Client|Android-arm64" Project="x64" />
+      <Platform Solution="Shipping Client|Android-x64" Project="x64" />
+      <Platform Solution="Shipping Server|Android" Project="x64" />
+      <Platform Solution="Shipping Server|Android-arm64" Project="x64" />
+      <Platform Solution="Shipping Server|Android-x64" Project="x64" />
+      <Platform Solution="Shipping|Android" Project="Android-arm64-v8a" />
+      <Platform Solution="Shipping|Android-arm64" Project="Android-arm64-v8a" />
+      <Platform Solution="Shipping|Android-x64" Project="Android-x86_64" />
+      <Platform Solution="Test Client|Android" Project="x64" />
+      <Platform Solution="Test Client|Android-arm64" Project="x64" />
+      <Platform Solution="Test Client|Android-x64" Project="x64" />
+      <Platform Solution="Test Server|Android" Project="x64" />
+      <Platform Solution="Test Server|Android-arm64" Project="x64" />
+      <Platform Solution="Test Server|Android-x64" Project="x64" />
+      <Platform Solution="Test|Android" Project="Android-arm64-v8a" />
+      <Platform Solution="Test|Android-arm64" Project="Android-arm64-v8a" />
+      <Platform Solution="Test|Android-x64" Project="Android-x86_64" />
+      <Build Solution="Debug Client|*" Project="false" />
+      <Build Solution="Debug Editor|Android" Project="false" />
+      <Build Solution="Debug Editor|Android-arm64" Project="false" />
+      <Build Solution="Debug Editor|Android-x64" Project="false" />
+      <Build Solution="Debug Editor|LinuxArm64" Project="false" />
+      <Build Solution="Debug Server|*" Project="false" />
+      <Build Solution="DebugGame Client|*" Project="false" />
+      <Build Solution="DebugGame Editor|Android" Project="false" />
+      <Build Solution="DebugGame Editor|Android-arm64" Project="false" />
+      <Build Solution="DebugGame Editor|Android-x64" Project="false" />
+      <Build Solution="DebugGame Editor|LinuxArm64" Project="false" />
+      <Build Solution="DebugGame Server|*" Project="false" />
+      <Build Solution="Development Client|*" Project="false" />
+      <Build Solution="Development Editor|Android" Project="false" />
+      <Build Solution="Development Editor|Android-arm64" Project="false" />
+      <Build Solution="Development Editor|Android-x64" Project="false" />
+      <Build Solution="Development Editor|LinuxArm64" Project="false" />
+      <Build Solution="Development Server|*" Project="false" />
+      <Build Solution="Shipping Client|*" Project="false" />
+      <Build Solution="Shipping Server|*" Project="false" />
+      <Build Solution="Test Client|*" Project="false" />
+      <Build Solution="Test Server|*" Project="false" />
+    </Project>
+  </Folder>
+  <Folder Name="/Programs/">
+    <Project Path="../../../clone/UnrealEngine/Engine/Source/Programs/AutomationTool/AutomationTool.csproj">
+      <BuildType Solution="Debug Client|*" Project="Development" />
+      <BuildType Solution="Debug Editor|*" Project="Development" />
+      <BuildType Solution="Debug Server|*" Project="Development" />
+      <BuildType Solution="DebugGame Client|*" Project="Development" />
+      <BuildType Solution="DebugGame Editor|*" Project="Development" />
+      <BuildType Solution="DebugGame Server|*" Project="Development" />
+      <BuildType Solution="DebugGame|*" Project="Development" />
+      <BuildType Solution="Development Client|*" Project="Development" />
+      <BuildType Solution="Development Editor|*" Project="Development" />
+      <BuildType Solution="Development Server|*" Project="Development" />
+      <BuildType Solution="Shipping Client|*" Project="Development" />
+      <BuildType Solution="Shipping Server|*" Project="Development" />
+      <BuildType Solution="Shipping|*" Project="Development" />
+      <BuildType Solution="Test Client|*" Project="Development" />
+      <BuildType Solution="Test Server|*" Project="Development" />
+      <BuildType Solution="Test|*" Project="Development" />
+    </Project>
+    <Project Path="../../../clone/UnrealEngine/Engine/Source/Programs/UnrealBuildTool/UnrealBuildTool.csproj">
+      <BuildType Solution="Debug Client|*" Project="Development" />
+      <BuildType Solution="Debug Editor|*" Project="Development" />
+      <BuildType Solution="Debug Server|*" Project="Development" />
+      <BuildType Solution="DebugGame Client|*" Project="Development" />
+      <BuildType Solution="DebugGame Editor|*" Project="Development" />
+      <BuildType Solution="DebugGame Server|*" Project="Development" />
+      <BuildType Solution="DebugGame|*" Project="Development" />
+      <BuildType Solution="Development Client|*" Project="Development" />
+      <BuildType Solution="Development Editor|*" Project="Development" />
+      <BuildType Solution="Development Server|*" Project="Development" />
+      <BuildType Solution="Shipping Client|*" Project="Development" />
+      <BuildType Solution="Shipping Server|*" Project="Development" />
+      <BuildType Solution="Shipping|*" Project="Development" />
+      <BuildType Solution="Test Client|*" Project="Development" />
+      <BuildType Solution="Test Server|*" Project="Development" />
+      <BuildType Solution="Test|*" Project="Development" />
+    </Project>
+  </Folder>
+  <Folder Name="/Programs/Automation/">
+    <Project Path="../../../clone/UnrealEngine/Engine/Platforms/VisionOS/Source/Programs/AutomationTool/VisionOS.Automation.csproj">
+      <BuildType Solution="Debug Client|*" Project="Development" />
+      <BuildType Solution="Debug Editor|*" Project="Development" />
+      <BuildType Solution="Debug Server|*" Project="Development" />
+      <BuildType Solution="DebugGame Client|*" Project="Development" />
+      <BuildType Solution="DebugGame Editor|*" Project="Development" />
+      <BuildType Solution="DebugGame Server|*" Project="Development" />
+      <BuildType Solution="DebugGame|*" Project="Development" />
+      <BuildType Solution="Development Client|*" Project="Development" />
+      <BuildType Solution="Development Editor|*" Project="Development" />
+      <BuildType Solution="Development Server|*" Project="Development" />
+      <BuildType Solution="Shipping Client|*" Project="Development" />
+      <BuildType Solution="Shipping Server|*" Project="Development" />
+      <BuildType Solution="Shipping|*" Project="Development" />
+      <BuildType Solution="Test Client|*" Project="Development" />
+      <BuildType Solution="Test Server|*" Project="Development" />
+      <BuildType Solution="Test|*" Project="Development" />
+    </Project>
+    <Project Path="../../../clone/UnrealEngine/Engine/Plugins/Performance/AutomatedPerfTesting/Build/Scripts/AutomatedPerfTesting.Automation.csproj">
+      <BuildType Solution="Debug Client|*" Project="Development" />
+      <BuildType Solution="Debug Editor|*" Project="Development" />
+      <BuildType Solution="Debug Server|*" Project="Development" />
+      <BuildType Solution="DebugGame Client|*" Project="Development" />
+      <BuildType Solution="DebugGame Editor|*" Project="Development" />
+      <BuildType Solution="DebugGame Server|*" Project="Development" />
+      <BuildType Solution="DebugGame|*" Project="Development" />
+      <BuildType Solution="Development Client|*" Project="Development" />
+      <BuildType Solution="Development Editor|*" Project="Development" />
+      <BuildType Solution="Development Server|*" Project="Development" />
+      <BuildType Solution="Shipping Client|*" Project="Development" />
+      <BuildType Solution="Shipping Server|*" Project="Development" />
+      <BuildType Solution="Shipping|*" Project="Development" />
+      <BuildType Solution="Test Client|*" Project="Development" />
+      <BuildType Solution="Test Server|*" Project="Development" />
+      <BuildType Solution="Test|*" Project="Development" />
+    </Project>
+    <Project Path="../../../clone/UnrealEngine/Engine/Plugins/VirtualProduction/ICVFXTesting/Build/Scripts/ICVFX.Automation.csproj">
+      <BuildType Solution="Debug Client|*" Project="Development" />
+      <BuildType Solution="Debug Editor|*" Project="Development" />
+      <BuildType Solution="Debug Server|*" Project="Development" />
+      <BuildType Solution="DebugGame Client|*" Project="Development" />
+      <BuildType Solution="DebugGame Editor|*" Project="Development" />
+      <BuildType Solution="DebugGame Server|*" Project="Development" />
+      <BuildType Solution="DebugGame|*" Project="Development" />
+      <BuildType Solution="Development Client|*" Project="Development" />
+      <BuildType Solution="Development Editor|*" Project="Development" />
+      <BuildType Solution="Development Server|*" Project="Development" />
+      <BuildType Solution="Shipping Client|*" Project="Development" />
+      <BuildType Solution="Shipping Server|*" Project="Development" />
+      <BuildType Solution="Shipping|*" Project="Development" />
+      <BuildType Solution="Test Client|*" Project="Development" />
+      <BuildType Solution="Test Server|*" Project="Development" />
+      <BuildType Solution="Test|*" Project="Development" />
+    </Project>
+    <Project Path="../../../clone/UnrealEngine/Engine/Source/Programs/AutomationTool/Android/Android.Automation.csproj">
+      <BuildType Solution="Debug Client|*" Project="Development" />
+      <BuildType Solution="Debug Editor|*" Project="Development" />
+      <BuildType Solution="Debug Server|*" Project="Development" />
+      <BuildType Solution="DebugGame Client|*" Project="Development" />
+      <BuildType Solution="DebugGame Editor|*" Project="Development" />
+      <BuildType Solution="DebugGame Server|*" Project="Development" />
+      <BuildType Solution="DebugGame|*" Project="Development" />
+      <BuildType Solution="Development Client|*" Project="Development" />
+      <BuildType Solution="Development Editor|*" Project="Development" />
+      <BuildType Solution="Development Server|*" Project="Development" />
+      <BuildType Solution="Shipping Client|*" Project="Development" />
+      <BuildType Solution="Shipping Server|*" Project="Development" />
+      <BuildType Solution="Shipping|*" Project="Development" />
+      <BuildType Solution="Test Client|*" Project="Development" />
+      <BuildType Solution="Test Server|*" Project="Development" />
+      <BuildType Solution="Test|*" Project="Development" />
+    </Project>
+    <Project Path="../../../clone/UnrealEngine/Engine/Source/Programs/AutomationTool/Apple/Apple.Automation.csproj">
+      <BuildType Solution="Debug Client|*" Project="Development" />
+      <BuildType Solution="Debug Editor|*" Project="Development" />
+      <BuildType Solution="Debug Server|*" Project="Development" />
+      <BuildType Solution="DebugGame Client|*" Project="Development" />
+      <BuildType Solution="DebugGame Editor|*" Project="Development" />
+      <BuildType Solution="DebugGame Server|*" Project="Development" />
+      <BuildType Solution="DebugGame|*" Project="Development" />
+      <BuildType Solution="Development Client|*" Project="Development" />
+      <BuildType Solution="Development Editor|*" Project="Development" />
+      <BuildType Solution="Development Server|*" Project="Development" />
+      <BuildType Solution="Shipping Client|*" Project="Development" />
+      <BuildType Solution="Shipping Server|*" Project="Development" />
+      <BuildType Solution="Shipping|*" Project="Development" />
+      <BuildType Solution="Test Client|*" Project="Development" />
+      <BuildType Solution="Test Server|*" Project="Development" />
+      <BuildType Solution="Test|*" Project="Development" />
+    </Project>
+    <Project Path="../../../clone/UnrealEngine/Engine/Source/Programs/AutomationTool/AutomationUtils/AutomationUtils.Automation.csproj">
+      <BuildType Solution="Debug Client|*" Project="Development" />
+      <BuildType Solution="Debug Editor|*" Project="Development" />
+      <BuildType Solution="Debug Server|*" Project="Development" />
+      <BuildType Solution="DebugGame Client|*" Project="Development" />
+      <BuildType Solution="DebugGame Editor|*" Project="Development" />
+      <BuildType Solution="DebugGame Server|*" Project="Development" />
+      <BuildType Solution="DebugGame|*" Project="Development" />
+      <BuildType Solution="Development Client|*" Project="Development" />
+      <BuildType Solution="Development Editor|*" Project="Development" />
+      <BuildType Solution="Development Server|*" Project="Development" />
+      <BuildType Solution="Shipping Client|*" Project="Development" />
+      <BuildType Solution="Shipping Server|*" Project="Development" />
+      <BuildType Solution="Shipping|*" Project="Development" />
+      <BuildType Solution="Test Client|*" Project="Development" />
+      <BuildType Solution="Test Server|*" Project="Development" />
+      <BuildType Solution="Test|*" Project="Development" />
+    </Project>
+    <Project Path="../../../clone/UnrealEngine/Engine/Source/Programs/AutomationTool/BuildGraph/BuildGraph.Automation.csproj">
+      <BuildType Solution="Debug Client|*" Project="Development" />
+      <BuildType Solution="Debug Editor|*" Project="Development" />
+      <BuildType Solution="Debug Server|*" Project="Development" />
+      <BuildType Solution="DebugGame Client|*" Project="Development" />
+      <BuildType Solution="DebugGame Editor|*" Project="Development" />
+      <BuildType Solution="DebugGame Server|*" Project="Development" />
+      <BuildType Solution="DebugGame|*" Project="Development" />
+      <BuildType Solution="Development Client|*" Project="Development" />
+      <BuildType Solution="Development Editor|*" Project="Development" />
+      <BuildType Solution="Development Server|*" Project="Development" />
+      <BuildType Solution="Shipping Client|*" Project="Development" />
+      <BuildType Solution="Shipping Server|*" Project="Development" />
+      <BuildType Solution="Shipping|*" Project="Development" />
+      <BuildType Solution="Test Client|*" Project="Development" />
+      <BuildType Solution="Test Server|*" Project="Development" />
+      <BuildType Solution="Test|*" Project="Development" />
+    </Project>
+    <Project Path="../../../clone/UnrealEngine/Engine/Source/Programs/AutomationTool/CookedEditor/CookedEditor.Automation.csproj">
+      <BuildType Solution="Debug Client|*" Project="Development" />
+      <BuildType Solution="Debug Editor|*" Project="Development" />
+      <BuildType Solution="Debug Server|*" Project="Development" />
+      <BuildType Solution="DebugGame Client|*" Project="Development" />
+      <BuildType Solution="DebugGame Editor|*" Project="Development" />
+      <BuildType Solution="DebugGame Server|*" Project="Development" />
+      <BuildType Solution="DebugGame|*" Project="Development" />
+      <BuildType Solution="Development Client|*" Project="Development" />
+      <BuildType Solution="Development Editor|*" Project="Development" />
+      <BuildType Solution="Development Server|*" Project="Development" />
+      <BuildType Solution="Shipping Client|*" Project="Development" />
+      <BuildType Solution="Shipping Server|*" Project="Development" />
+      <BuildType Solution="Shipping|*" Project="Development" />
+      <BuildType Solution="Test Client|*" Project="Development" />
+      <BuildType Solution="Test Server|*" Project="Development" />
+      <BuildType Solution="Test|*" Project="Development" />
+    </Project>
+    <Project Path="../../../clone/UnrealEngine/Engine/Source/Programs/AutomationTool/CrowdinLocalization/CrowdinLocalization.Automation.csproj">
+      <BuildType Solution="Debug Client|*" Project="Development" />
+      <BuildType Solution="Debug Editor|*" Project="Development" />
+      <BuildType Solution="Debug Server|*" Project="Development" />
+      <BuildType Solution="DebugGame Client|*" Project="Development" />
+      <BuildType Solution="DebugGame Editor|*" Project="Development" />
+      <BuildType Solution="DebugGame Server|*" Project="Development" />
+      <BuildType Solution="DebugGame|*" Project="Development" />
+      <BuildType Solution="Development Client|*" Project="Development" />
+      <BuildType Solution="Development Editor|*" Project="Development" />
+      <BuildType Solution="Development Server|*" Project="Development" />
+      <BuildType Solution="Shipping Client|*" Project="Development" />
+      <BuildType Solution="Shipping Server|*" Project="Development" />
+      <BuildType Solution="Shipping|*" Project="Development" />
+      <BuildType Solution="Test Client|*" Project="Development" />
+      <BuildType Solution="Test Server|*" Project="Development" />
+      <BuildType Solution="Test|*" Project="Development" />
+    </Project>
+    <Project Path="../../../clone/UnrealEngine/Engine/Source/Programs/AutomationTool/Gauntlet/Gauntlet.Automation.csproj">
+      <BuildType Solution="Debug Client|*" Project="Development" />
+      <BuildType Solution="Debug Editor|*" Project="Development" />
+      <BuildType Solution="Debug Server|*" Project="Development" />
+      <BuildType Solution="DebugGame Client|*" Project="Development" />
+      <BuildType Solution="DebugGame Editor|*" Project="Development" />
+      <BuildType Solution="DebugGame Server|*" Project="Development" />
+      <BuildType Solution="DebugGame|*" Project="Development" />
+      <BuildType Solution="Development Client|*" Project="Development" />
+      <BuildType Solution="Development Editor|*" Project="Development" />
+      <BuildType Solution="Development Server|*" Project="Development" />
+      <BuildType Solution="Shipping Client|*" Project="Development" />
+      <BuildType Solution="Shipping Server|*" Project="Development" />
+      <BuildType Solution="Shipping|*" Project="Development" />
+      <BuildType Solution="Test Client|*" Project="Development" />
+      <BuildType Solution="Test Server|*" Project="Development" />
+      <BuildType Solution="Test|*" Project="Development" />
+    </Project>
+    <Project Path="../../../clone/UnrealEngine/Engine/Source/Programs/AutomationTool/Insights/Insights.Automation.csproj">
+      <BuildType Solution="Debug Client|*" Project="Development" />
+      <BuildType Solution="Debug Editor|*" Project="Development" />
+      <BuildType Solution="Debug Server|*" Project="Development" />
+      <BuildType Solution="DebugGame Client|*" Project="Development" />
+      <BuildType Solution="DebugGame Editor|*" Project="Development" />
+      <BuildType Solution="DebugGame Server|*" Project="Development" />
+      <BuildType Solution="DebugGame|*" Project="Development" />
+      <BuildType Solution="Development Client|*" Project="Development" />
+      <BuildType Solution="Development Editor|*" Project="Development" />
+      <BuildType Solution="Development Server|*" Project="Development" />
+      <BuildType Solution="Shipping Client|*" Project="Development" />
+      <BuildType Solution="Shipping Server|*" Project="Development" />
+      <BuildType Solution="Shipping|*" Project="Development" />
+      <BuildType Solution="Test Client|*" Project="Development" />
+      <BuildType Solution="Test Server|*" Project="Development" />
+      <BuildType Solution="Test|*" Project="Development" />
+    </Project>
+    <Project Path="../../../clone/UnrealEngine/Engine/Source/Programs/AutomationTool/IOS/IOS.Automation.csproj">
+      <BuildType Solution="Debug Client|*" Project="Development" />
+      <BuildType Solution="Debug Editor|*" Project="Development" />
+      <BuildType Solution="Debug Server|*" Project="Development" />
+      <BuildType Solution="DebugGame Client|*" Project="Development" />
+      <BuildType Solution="DebugGame Editor|*" Project="Development" />
+      <BuildType Solution="DebugGame Server|*" Project="Development" />
+      <BuildType Solution="DebugGame|*" Project="Development" />
+      <BuildType Solution="Development Client|*" Project="Development" />
+      <BuildType Solution="Development Editor|*" Project="Development" />
+      <BuildType Solution="Development Server|*" Project="Development" />
+      <BuildType Solution="Shipping Client|*" Project="Development" />
+      <BuildType Solution="Shipping Server|*" Project="Development" />
+      <BuildType Solution="Shipping|*" Project="Development" />
+      <BuildType Solution="Test Client|*" Project="Development" />
+      <BuildType Solution="Test Server|*" Project="Development" />
+      <BuildType Solution="Test|*" Project="Development" />
+    </Project>
+    <Project Path="../../../clone/UnrealEngine/Engine/Source/Programs/AutomationTool/Linux/Linux.Automation.csproj">
+      <BuildType Solution="Debug Client|*" Project="Development" />
+      <BuildType Solution="Debug Editor|*" Project="Development" />
+      <BuildType Solution="Debug Server|*" Project="Development" />
+      <BuildType Solution="DebugGame Client|*" Project="Development" />
+      <BuildType Solution="DebugGame Editor|*" Project="Development" />
+      <BuildType Solution="DebugGame Server|*" Project="Development" />
+      <BuildType Solution="DebugGame|*" Project="Development" />
+      <BuildType Solution="Development Client|*" Project="Development" />
+      <BuildType Solution="Development Editor|*" Project="Development" />
+      <BuildType Solution="Development Server|*" Project="Development" />
+      <BuildType Solution="Shipping Client|*" Project="Development" />
+      <BuildType Solution="Shipping Server|*" Project="Development" />
+      <BuildType Solution="Shipping|*" Project="Development" />
+      <BuildType Solution="Test Client|*" Project="Development" />
+      <BuildType Solution="Test Server|*" Project="Development" />
+      <BuildType Solution="Test|*" Project="Development" />
+    </Project>
+    <Project Path="../../../clone/UnrealEngine/Engine/Source/Programs/AutomationTool/LiveLinkHub/LiveLinkHub.Automation.csproj">
+      <BuildType Solution="Debug Client|*" Project="Development" />
+      <BuildType Solution="Debug Editor|*" Project="Development" />
+      <BuildType Solution="Debug Server|*" Project="Development" />
+      <BuildType Solution="DebugGame Client|*" Project="Development" />
+      <BuildType Solution="DebugGame Editor|*" Project="Development" />
+      <BuildType Solution="DebugGame Server|*" Project="Development" />
+      <BuildType Solution="DebugGame|*" Project="Development" />
+      <BuildType Solution="Development Client|*" Project="Development" />
+      <BuildType Solution="Development Editor|*" Project="Development" />
+      <BuildType Solution="Development Server|*" Project="Development" />
+      <BuildType Solution="Shipping Client|*" Project="Development" />
+      <BuildType Solution="Shipping Server|*" Project="Development" />
+      <BuildType Solution="Shipping|*" Project="Development" />
+      <BuildType Solution="Test Client|*" Project="Development" />
+      <BuildType Solution="Test Server|*" Project="Development" />
+      <BuildType Solution="Test|*" Project="Development" />
+    </Project>
+    <Project Path="../../../clone/UnrealEngine/Engine/Source/Programs/AutomationTool/Localization/Localization.Automation.csproj">
+      <BuildType Solution="Debug Client|*" Project="Development" />
+      <BuildType Solution="Debug Editor|*" Project="Development" />
+      <BuildType Solution="Debug Server|*" Project="Development" />
+      <BuildType Solution="DebugGame Client|*" Project="Development" />
+      <BuildType Solution="DebugGame Editor|*" Project="Development" />
+      <BuildType Solution="DebugGame Server|*" Project="Development" />
+      <BuildType Solution="DebugGame|*" Project="Development" />
+      <BuildType Solution="Development Client|*" Project="Development" />
+      <BuildType Solution="Development Editor|*" Project="Development" />
+      <BuildType Solution="Development Server|*" Project="Development" />
+      <BuildType Solution="Shipping Client|*" Project="Development" />
+      <BuildType Solution="Shipping Server|*" Project="Development" />
+      <BuildType Solution="Shipping|*" Project="Development" />
+      <BuildType Solution="Test Client|*" Project="Development" />
+      <BuildType Solution="Test Server|*" Project="Development" />
+      <BuildType Solution="Test|*" Project="Development" />
+    </Project>
+    <Project Path="../../../clone/UnrealEngine/Engine/Source/Programs/AutomationTool/LowLevelTests/LowLevelTests.Automation.csproj">
+      <BuildType Solution="Debug Client|*" Project="Development" />
+      <BuildType Solution="Debug Editor|*" Project="Development" />
+      <BuildType Solution="Debug Server|*" Project="Development" />
+      <BuildType Solution="DebugGame Client|*" Project="Development" />
+      <BuildType Solution="DebugGame Editor|*" Project="Development" />
+      <BuildType Solution="DebugGame Server|*" Project="Development" />
+      <BuildType Solution="DebugGame|*" Project="Development" />
+      <BuildType Solution="Development Client|*" Project="Development" />
+      <BuildType Solution="Development Editor|*" Project="Development" />
+      <BuildType Solution="Development Server|*" Project="Development" />
+      <BuildType Solution="Shipping Client|*" Project="Development" />
+      <BuildType Solution="Shipping Server|*" Project="Development" />
+      <BuildType Solution="Shipping|*" Project="Development" />
+      <BuildType Solution="Test Client|*" Project="Development" />
+      <BuildType Solution="Test Server|*" Project="Development" />
+      <BuildType Solution="Test|*" Project="Development" />
+    </Project>
+    <Project Path="../../../clone/UnrealEngine/Engine/Source/Programs/AutomationTool/Mac/Mac.Automation.csproj">
+      <BuildType Solution="Debug Client|*" Project="Development" />
+      <BuildType Solution="Debug Editor|*" Project="Development" />
+      <BuildType Solution="Debug Server|*" Project="Development" />
+      <BuildType Solution="DebugGame Client|*" Project="Development" />
+      <BuildType Solution="DebugGame Editor|*" Project="Development" />
+      <BuildType Solution="DebugGame Server|*" Project="Development" />
+      <BuildType Solution="DebugGame|*" Project="Development" />
+      <BuildType Solution="Development Client|*" Project="Development" />
+      <BuildType Solution="Development Editor|*" Project="Development" />
+      <BuildType Solution="Development Server|*" Project="Development" />
+      <BuildType Solution="Shipping Client|*" Project="Development" />
+      <BuildType Solution="Shipping Server|*" Project="Development" />
+      <BuildType Solution="Shipping|*" Project="Development" />
+      <BuildType Solution="Test Client|*" Project="Development" />
+      <BuildType Solution="Test Server|*" Project="Development" />
+      <BuildType Solution="Test|*" Project="Development" />
+    </Project>
+    <Project Path="../../../clone/UnrealEngine/Engine/Source/Programs/AutomationTool/Microsoft/Microsoft.Automation.csproj">
+      <BuildType Solution="Debug Client|*" Project="Development" />
+      <BuildType Solution="Debug Editor|*" Project="Development" />
+      <BuildType Solution="Debug Server|*" Project="Development" />
+      <BuildType Solution="DebugGame Client|*" Project="Development" />
+      <BuildType Solution="DebugGame Editor|*" Project="Development" />
+      <BuildType Solution="DebugGame Server|*" Project="Development" />
+      <BuildType Solution="DebugGame|*" Project="Development" />
+      <BuildType Solution="Development Client|*" Project="Development" />
+      <BuildType Solution="Development Editor|*" Project="Development" />
+      <BuildType Solution="Development Server|*" Project="Development" />
+      <BuildType Solution="Shipping Client|*" Project="Development" />
+      <BuildType Solution="Shipping Server|*" Project="Development" />
+      <BuildType Solution="Shipping|*" Project="Development" />
+      <BuildType Solution="Test Client|*" Project="Development" />
+      <BuildType Solution="Test Server|*" Project="Development" />
+      <BuildType Solution="Test|*" Project="Development" />
+    </Project>
+    <Project Path="../../../clone/UnrealEngine/Engine/Source/Programs/AutomationTool/Mutable/Mutable.Automation.csproj">
+      <BuildType Solution="Debug Client|*" Project="Development" />
+      <BuildType Solution="Debug Editor|*" Project="Development" />
+      <BuildType Solution="Debug Server|*" Project="Development" />
+      <BuildType Solution="DebugGame Client|*" Project="Development" />
+      <BuildType Solution="DebugGame Editor|*" Project="Development" />
+      <BuildType Solution="DebugGame Server|*" Project="Development" />
+      <BuildType Solution="DebugGame|*" Project="Development" />
+      <BuildType Solution="Development Client|*" Project="Development" />
+      <BuildType Solution="Development Editor|*" Project="Development" />
+      <BuildType Solution="Development Server|*" Project="Development" />
+      <BuildType Solution="Shipping Client|*" Project="Development" />
+      <BuildType Solution="Shipping Server|*" Project="Development" />
+      <BuildType Solution="Shipping|*" Project="Development" />
+      <BuildType Solution="Test Client|*" Project="Development" />
+      <BuildType Solution="Test Server|*" Project="Development" />
+      <BuildType Solution="Test|*" Project="Development" />
+    </Project>
+    <Project Path="../../../clone/UnrealEngine/Engine/Source/Programs/AutomationTool/OneSkyLocalization/OneSkyLocalization.Automation.csproj">
+      <BuildType Solution="Debug Client|*" Project="Development" />
+      <BuildType Solution="Debug Editor|*" Project="Development" />
+      <BuildType Solution="Debug Server|*" Project="Development" />
+      <BuildType Solution="DebugGame Client|*" Project="Development" />
+      <BuildType Solution="DebugGame Editor|*" Project="Development" />
+      <BuildType Solution="DebugGame Server|*" Project="Development" />
+      <BuildType Solution="DebugGame|*" Project="Development" />
+      <BuildType Solution="Development Client|*" Project="Development" />
+      <BuildType Solution="Development Editor|*" Project="Development" />
+      <BuildType Solution="Development Server|*" Project="Development" />
+      <BuildType Solution="Shipping Client|*" Project="Development" />
+      <BuildType Solution="Shipping Server|*" Project="Development" />
+      <BuildType Solution="Shipping|*" Project="Development" />
+      <BuildType Solution="Test Client|*" Project="Development" />
+      <BuildType Solution="Test Server|*" Project="Development" />
+      <BuildType Solution="Test|*" Project="Development" />
+    </Project>
+    <Project Path="../../../clone/UnrealEngine/Engine/Source/Programs/AutomationTool/Scripts/AutomationScripts.Automation.csproj">
+      <BuildType Solution="Debug Client|*" Project="Development" />
+      <BuildType Solution="Debug Editor|*" Project="Development" />
+      <BuildType Solution="Debug Server|*" Project="Development" />
+      <BuildType Solution="DebugGame Client|*" Project="Development" />
+      <BuildType Solution="DebugGame Editor|*" Project="Development" />
+      <BuildType Solution="DebugGame Server|*" Project="Development" />
+      <BuildType Solution="DebugGame|*" Project="Development" />
+      <BuildType Solution="Development Client|*" Project="Development" />
+      <BuildType Solution="Development Editor|*" Project="Development" />
+      <BuildType Solution="Development Server|*" Project="Development" />
+      <BuildType Solution="Shipping Client|*" Project="Development" />
+      <BuildType Solution="Shipping Server|*" Project="Development" />
+      <BuildType Solution="Shipping|*" Project="Development" />
+      <BuildType Solution="Test Client|*" Project="Development" />
+      <BuildType Solution="Test Server|*" Project="Development" />
+      <BuildType Solution="Test|*" Project="Development" />
+    </Project>
+    <Project Path="../../../clone/UnrealEngine/Engine/Source/Programs/AutomationTool/SmartlingLocalization/SmartlingLocalization.Automation.csproj">
+      <BuildType Solution="Debug Client|*" Project="Development" />
+      <BuildType Solution="Debug Editor|*" Project="Development" />
+      <BuildType Solution="Debug Server|*" Project="Development" />
+      <BuildType Solution="DebugGame Client|*" Project="Development" />
+      <BuildType Solution="DebugGame Editor|*" Project="Development" />
+      <BuildType Solution="DebugGame Server|*" Project="Development" />
+      <BuildType Solution="DebugGame|*" Project="Development" />
+      <BuildType Solution="Development Client|*" Project="Development" />
+      <BuildType Solution="Development Editor|*" Project="Development" />
+      <BuildType Solution="Development Server|*" Project="Development" />
+      <BuildType Solution="Shipping Client|*" Project="Development" />
+      <BuildType Solution="Shipping Server|*" Project="Development" />
+      <BuildType Solution="Shipping|*" Project="Development" />
+      <BuildType Solution="Test Client|*" Project="Development" />
+      <BuildType Solution="Test Server|*" Project="Development" />
+      <BuildType Solution="Test|*" Project="Development" />
+    </Project>
+    <Project Path="../../../clone/UnrealEngine/Engine/Source/Programs/AutomationTool/SteamDeck/SteamDeck.Automation.csproj">
+      <BuildType Solution="Debug Client|*" Project="Development" />
+      <BuildType Solution="Debug Editor|*" Project="Development" />
+      <BuildType Solution="Debug Server|*" Project="Development" />
+      <BuildType Solution="DebugGame Client|*" Project="Development" />
+      <BuildType Solution="DebugGame Editor|*" Project="Development" />
+      <BuildType Solution="DebugGame Server|*" Project="Development" />
+      <BuildType Solution="DebugGame|*" Project="Development" />
+      <BuildType Solution="Development Client|*" Project="Development" />
+      <BuildType Solution="Development Editor|*" Project="Development" />
+      <BuildType Solution="Development Server|*" Project="Development" />
+      <BuildType Solution="Shipping Client|*" Project="Development" />
+      <BuildType Solution="Shipping Server|*" Project="Development" />
+      <BuildType Solution="Shipping|*" Project="Development" />
+      <BuildType Solution="Test Client|*" Project="Development" />
+      <BuildType Solution="Test Server|*" Project="Development" />
+      <BuildType Solution="Test|*" Project="Development" />
+    </Project>
+    <Project Path="../../../clone/UnrealEngine/Engine/Source/Programs/AutomationTool/Turnkey/Turnkey.Automation.csproj">
+      <BuildType Solution="Debug Client|*" Project="Development" />
+      <BuildType Solution="Debug Editor|*" Project="Development" />
+      <BuildType Solution="Debug Server|*" Project="Development" />
+      <BuildType Solution="DebugGame Client|*" Project="Development" />
+      <BuildType Solution="DebugGame Editor|*" Project="Development" />
+      <BuildType Solution="DebugGame Server|*" Project="Development" />
+      <BuildType Solution="DebugGame|*" Project="Development" />
+      <BuildType Solution="Development Client|*" Project="Development" />
+      <BuildType Solution="Development Editor|*" Project="Development" />
+      <BuildType Solution="Development Server|*" Project="Development" />
+      <BuildType Solution="Shipping Client|*" Project="Development" />
+      <BuildType Solution="Shipping Server|*" Project="Development" />
+      <BuildType Solution="Shipping|*" Project="Development" />
+      <BuildType Solution="Test Client|*" Project="Development" />
+      <BuildType Solution="Test Server|*" Project="Development" />
+      <BuildType Solution="Test|*" Project="Development" />
+    </Project>
+    <Project Path="../../../clone/UnrealEngine/Engine/Source/Programs/AutomationTool/TVOS/TVOS.Automation.csproj">
+      <BuildType Solution="Debug Client|*" Project="Development" />
+      <BuildType Solution="Debug Editor|*" Project="Development" />
+      <BuildType Solution="Debug Server|*" Project="Development" />
+      <BuildType Solution="DebugGame Client|*" Project="Development" />
+      <BuildType Solution="DebugGame Editor|*" Project="Development" />
+      <BuildType Solution="DebugGame Server|*" Project="Development" />
+      <BuildType Solution="DebugGame|*" Project="Development" />
+      <BuildType Solution="Development Client|*" Project="Development" />
+      <BuildType Solution="Development Editor|*" Project="Development" />
+      <BuildType Solution="Development Server|*" Project="Development" />
+      <BuildType Solution="Shipping Client|*" Project="Development" />
+      <BuildType Solution="Shipping Server|*" Project="Development" />
+      <BuildType Solution="Shipping|*" Project="Development" />
+      <BuildType Solution="Test Client|*" Project="Development" />
+      <BuildType Solution="Test Server|*" Project="Development" />
+      <BuildType Solution="Test|*" Project="Development" />
+    </Project>
+    <Project Path="../../../clone/UnrealEngine/Engine/Source/Programs/AutomationTool/Win/Win.Automation.csproj">
+      <BuildType Solution="Debug Client|*" Project="Development" />
+      <BuildType Solution="Debug Editor|*" Project="Development" />
+      <BuildType Solution="Debug Server|*" Project="Development" />
+      <BuildType Solution="DebugGame Client|*" Project="Development" />
+      <BuildType Solution="DebugGame Editor|*" Project="Development" />
+      <BuildType Solution="DebugGame Server|*" Project="Development" />
+      <BuildType Solution="DebugGame|*" Project="Development" />
+      <BuildType Solution="Development Client|*" Project="Development" />
+      <BuildType Solution="Development Editor|*" Project="Development" />
+      <BuildType Solution="Development Server|*" Project="Development" />
+      <BuildType Solution="Shipping Client|*" Project="Development" />
+      <BuildType Solution="Shipping Server|*" Project="Development" />
+      <BuildType Solution="Shipping|*" Project="Development" />
+      <BuildType Solution="Test Client|*" Project="Development" />
+      <BuildType Solution="Test Server|*" Project="Development" />
+      <BuildType Solution="Test|*" Project="Development" />
+    </Project>
+    <Project Path="../../../clone/UnrealEngine/Engine/Source/Programs/AutomationTool/XLocLocalization/XLocLocalization.Automation.csproj">
+      <BuildType Solution="Debug Client|*" Project="Development" />
+      <BuildType Solution="Debug Editor|*" Project="Development" />
+      <BuildType Solution="Debug Server|*" Project="Development" />
+      <BuildType Solution="DebugGame Client|*" Project="Development" />
+      <BuildType Solution="DebugGame Editor|*" Project="Development" />
+      <BuildType Solution="DebugGame Server|*" Project="Development" />
+      <BuildType Solution="DebugGame|*" Project="Development" />
+      <BuildType Solution="Development Client|*" Project="Development" />
+      <BuildType Solution="Development Editor|*" Project="Development" />
+      <BuildType Solution="Development Server|*" Project="Development" />
+      <BuildType Solution="Shipping Client|*" Project="Development" />
+      <BuildType Solution="Shipping Server|*" Project="Development" />
+      <BuildType Solution="Shipping|*" Project="Development" />
+      <BuildType Solution="Test Client|*" Project="Development" />
+      <BuildType Solution="Test Server|*" Project="Development" />
+      <BuildType Solution="Test|*" Project="Development" />
+    </Project>
+  </Folder>
+  <Folder Name="/Programs/Shared/">
+    <Project Path="../../../clone/UnrealEngine/Engine/Source/Programs/Shared/EpicGames.Analytics.Generators/EpicGames.Analytics.Generators.csproj">
+      <BuildType Solution="Debug Client|*" Project="Development" />
+      <BuildType Solution="Debug Editor|*" Project="Development" />
+      <BuildType Solution="Debug Server|*" Project="Development" />
+      <BuildType Solution="DebugGame Client|*" Project="Development" />
+      <BuildType Solution="DebugGame Editor|*" Project="Development" />
+      <BuildType Solution="DebugGame Server|*" Project="Development" />
+      <BuildType Solution="DebugGame|*" Project="Development" />
+      <BuildType Solution="Development Client|*" Project="Development" />
+      <BuildType Solution="Development Editor|*" Project="Development" />
+      <BuildType Solution="Development Server|*" Project="Development" />
+      <BuildType Solution="Shipping Client|*" Project="Development" />
+      <BuildType Solution="Shipping Server|*" Project="Development" />
+      <BuildType Solution="Shipping|*" Project="Development" />
+      <BuildType Solution="Test Client|*" Project="Development" />
+      <BuildType Solution="Test Server|*" Project="Development" />
+      <BuildType Solution="Test|*" Project="Development" />
+    </Project>
+    <Project Path="../../../clone/UnrealEngine/Engine/Source/Programs/Shared/EpicGames.Analytics.PerformanceTrends/EpicGames.Analytics.PerformanceTrends.csproj">
+      <BuildType Solution="Debug Client|*" Project="Development" />
+      <BuildType Solution="Debug Editor|*" Project="Development" />
+      <BuildType Solution="Debug Server|*" Project="Development" />
+      <BuildType Solution="DebugGame Client|*" Project="Development" />
+      <BuildType Solution="DebugGame Editor|*" Project="Development" />
+      <BuildType Solution="DebugGame Server|*" Project="Development" />
+      <BuildType Solution="DebugGame|*" Project="Development" />
+      <BuildType Solution="Development Client|*" Project="Development" />
+      <BuildType Solution="Development Editor|*" Project="Development" />
+      <BuildType Solution="Development Server|*" Project="Development" />
+      <BuildType Solution="Shipping Client|*" Project="Development" />
+      <BuildType Solution="Shipping Server|*" Project="Development" />
+      <BuildType Solution="Shipping|*" Project="Development" />
+      <BuildType Solution="Test Client|*" Project="Development" />
+      <BuildType Solution="Test Server|*" Project="Development" />
+      <BuildType Solution="Test|*" Project="Development" />
+    </Project>
+    <Project Path="../../../clone/UnrealEngine/Engine/Source/Programs/Shared/EpicGames.Analytics.Telemetry/EpicGames.Analytics.Telemetry.csproj">
+      <BuildType Solution="Debug Client|*" Project="Development" />
+      <BuildType Solution="Debug Editor|*" Project="Development" />
+      <BuildType Solution="Debug Server|*" Project="Development" />
+      <BuildType Solution="DebugGame Client|*" Project="Development" />
+      <BuildType Solution="DebugGame Editor|*" Project="Development" />
+      <BuildType Solution="DebugGame Server|*" Project="Development" />
+      <BuildType Solution="DebugGame|*" Project="Development" />
+      <BuildType Solution="Development Client|*" Project="Development" />
+      <BuildType Solution="Development Editor|*" Project="Development" />
+      <BuildType Solution="Development Server|*" Project="Development" />
+      <BuildType Solution="Shipping Client|*" Project="Development" />
+      <BuildType Solution="Shipping Server|*" Project="Development" />
+      <BuildType Solution="Shipping|*" Project="Development" />
+      <BuildType Solution="Test Client|*" Project="Development" />
+      <BuildType Solution="Test Server|*" Project="Development" />
+      <BuildType Solution="Test|*" Project="Development" />
+    </Project>
+    <Project Path="../../../clone/UnrealEngine/Engine/Source/Programs/Shared/EpicGames.AspNet/EpicGames.AspNet.csproj">
+      <BuildType Solution="Debug Client|*" Project="Development" />
+      <BuildType Solution="Debug Editor|*" Project="Development" />
+      <BuildType Solution="Debug Server|*" Project="Development" />
+      <BuildType Solution="DebugGame Client|*" Project="Development" />
+      <BuildType Solution="DebugGame Editor|*" Project="Development" />
+      <BuildType Solution="DebugGame Server|*" Project="Development" />
+      <BuildType Solution="DebugGame|*" Project="Development" />
+      <BuildType Solution="Development Client|*" Project="Development" />
+      <BuildType Solution="Development Editor|*" Project="Development" />
+      <BuildType Solution="Development Server|*" Project="Development" />
+      <BuildType Solution="Shipping Client|*" Project="Development" />
+      <BuildType Solution="Shipping Server|*" Project="Development" />
+      <BuildType Solution="Shipping|*" Project="Development" />
+      <BuildType Solution="Test Client|*" Project="Development" />
+      <BuildType Solution="Test Server|*" Project="Development" />
+      <BuildType Solution="Test|*" Project="Development" />
+    </Project>
+    <Project Path="../../../clone/UnrealEngine/Engine/Source/Programs/Shared/EpicGames.Benchmarks/EpicGames.Benchmarks.csproj">
+      <BuildType Solution="Debug Client|*" Project="Development" />
+      <BuildType Solution="Debug Editor|*" Project="Development" />
+      <BuildType Solution="Debug Server|*" Project="Development" />
+      <BuildType Solution="DebugGame Client|*" Project="Development" />
+      <BuildType Solution="DebugGame Editor|*" Project="Development" />
+      <BuildType Solution="DebugGame Server|*" Project="Development" />
+      <BuildType Solution="DebugGame|*" Project="Development" />
+      <BuildType Solution="Development Client|*" Project="Development" />
+      <BuildType Solution="Development Editor|*" Project="Development" />
+      <BuildType Solution="Development Server|*" Project="Development" />
+      <BuildType Solution="Shipping Client|*" Project="Development" />
+      <BuildType Solution="Shipping Server|*" Project="Development" />
+      <BuildType Solution="Shipping|*" Project="Development" />
+      <BuildType Solution="Test Client|*" Project="Development" />
+      <BuildType Solution="Test Server|*" Project="Development" />
+      <BuildType Solution="Test|*" Project="Development" />
+    </Project>
+    <Project Path="../../../clone/UnrealEngine/Engine/Source/Programs/Shared/EpicGames.Build/EpicGames.Build.csproj">
+      <BuildType Solution="Debug Client|*" Project="Development" />
+      <BuildType Solution="Debug Editor|*" Project="Development" />
+      <BuildType Solution="Debug Server|*" Project="Development" />
+      <BuildType Solution="DebugGame Client|*" Project="Development" />
+      <BuildType Solution="DebugGame Editor|*" Project="Development" />
+      <BuildType Solution="DebugGame Server|*" Project="Development" />
+      <BuildType Solution="DebugGame|*" Project="Development" />
+      <BuildType Solution="Development Client|*" Project="Development" />
+      <BuildType Solution="Development Editor|*" Project="Development" />
+      <BuildType Solution="Development Server|*" Project="Development" />
+      <BuildType Solution="Shipping Client|*" Project="Development" />
+      <BuildType Solution="Shipping Server|*" Project="Development" />
+      <BuildType Solution="Shipping|*" Project="Development" />
+      <BuildType Solution="Test Client|*" Project="Development" />
+      <BuildType Solution="Test Server|*" Project="Development" />
+      <BuildType Solution="Test|*" Project="Development" />
+    </Project>
+    <Project Path="../../../clone/UnrealEngine/Engine/Source/Programs/Shared/EpicGames.BuildGraph/EpicGames.BuildGraph.csproj">
+      <BuildType Solution="Debug Client|*" Project="Development" />
+      <BuildType Solution="Debug Editor|*" Project="Development" />
+      <BuildType Solution="Debug Server|*" Project="Development" />
+      <BuildType Solution="DebugGame Client|*" Project="Development" />
+      <BuildType Solution="DebugGame Editor|*" Project="Development" />
+      <BuildType Solution="DebugGame Server|*" Project="Development" />
+      <BuildType Solution="DebugGame|*" Project="Development" />
+      <BuildType Solution="Development Client|*" Project="Development" />
+      <BuildType Solution="Development Editor|*" Project="Development" />
+      <BuildType Solution="Development Server|*" Project="Development" />
+      <BuildType Solution="Shipping Client|*" Project="Development" />
+      <BuildType Solution="Shipping Server|*" Project="Development" />
+      <BuildType Solution="Shipping|*" Project="Development" />
+      <BuildType Solution="Test Client|*" Project="Development" />
+      <BuildType Solution="Test Server|*" Project="Development" />
+      <BuildType Solution="Test|*" Project="Development" />
+    </Project>
+    <Project Path="../../../clone/UnrealEngine/Engine/Source/Programs/Shared/EpicGames.Core/EpicGames.Core.csproj">
+      <BuildType Solution="Debug Client|*" Project="Development" />
+      <BuildType Solution="Debug Editor|*" Project="Development" />
+      <BuildType Solution="Debug Server|*" Project="Development" />
+      <BuildType Solution="DebugGame Client|*" Project="Development" />
+      <BuildType Solution="DebugGame Editor|*" Project="Development" />
+      <BuildType Solution="DebugGame Server|*" Project="Development" />
+      <BuildType Solution="DebugGame|*" Project="Development" />
+      <BuildType Solution="Development Client|*" Project="Development" />
+      <BuildType Solution="Development Editor|*" Project="Development" />
+      <BuildType Solution="Development Server|*" Project="Development" />
+      <BuildType Solution="Shipping Client|*" Project="Development" />
+      <BuildType Solution="Shipping Server|*" Project="Development" />
+      <BuildType Solution="Shipping|*" Project="Development" />
+      <BuildType Solution="Test Client|*" Project="Development" />
+      <BuildType Solution="Test Server|*" Project="Development" />
+      <BuildType Solution="Test|*" Project="Development" />
+    </Project>
+    <Project Path="../../../clone/UnrealEngine/Engine/Source/Programs/Shared/EpicGames.Horde/EpicGames.Horde.csproj">
+      <BuildType Solution="Debug Client|*" Project="Development" />
+      <BuildType Solution="Debug Editor|*" Project="Development" />
+      <BuildType Solution="Debug Server|*" Project="Development" />
+      <BuildType Solution="DebugGame Client|*" Project="Development" />
+      <BuildType Solution="DebugGame Editor|*" Project="Development" />
+      <BuildType Solution="DebugGame Server|*" Project="Development" />
+      <BuildType Solution="DebugGame|*" Project="Development" />
+      <BuildType Solution="Development Client|*" Project="Development" />
+      <BuildType Solution="Development Editor|*" Project="Development" />
+      <BuildType Solution="Development Server|*" Project="Development" />
+      <BuildType Solution="Shipping Client|*" Project="Development" />
+      <BuildType Solution="Shipping Server|*" Project="Development" />
+      <BuildType Solution="Shipping|*" Project="Development" />
+      <BuildType Solution="Test Client|*" Project="Development" />
+      <BuildType Solution="Test Server|*" Project="Development" />
+      <BuildType Solution="Test|*" Project="Development" />
+    </Project>
+    <Project Path="../../../clone/UnrealEngine/Engine/Source/Programs/Shared/EpicGames.IoHash/EpicGames.IoHash.csproj">
+      <BuildType Solution="Debug Client|*" Project="Development" />
+      <BuildType Solution="Debug Editor|*" Project="Development" />
+      <BuildType Solution="Debug Server|*" Project="Development" />
+      <BuildType Solution="DebugGame Client|*" Project="Development" />
+      <BuildType Solution="DebugGame Editor|*" Project="Development" />
+      <BuildType Solution="DebugGame Server|*" Project="Development" />
+      <BuildType Solution="DebugGame|*" Project="Development" />
+      <BuildType Solution="Development Client|*" Project="Development" />
+      <BuildType Solution="Development Editor|*" Project="Development" />
+      <BuildType Solution="Development Server|*" Project="Development" />
+      <BuildType Solution="Shipping Client|*" Project="Development" />
+      <BuildType Solution="Shipping Server|*" Project="Development" />
+      <BuildType Solution="Shipping|*" Project="Development" />
+      <BuildType Solution="Test Client|*" Project="Development" />
+      <BuildType Solution="Test Server|*" Project="Development" />
+      <BuildType Solution="Test|*" Project="Development" />
+    </Project>
+    <Project Path="../../../clone/UnrealEngine/Engine/Source/Programs/Shared/EpicGames.LogMatchers/EpicGames.LogMatchers.csproj">
+      <BuildType Solution="Debug Client|*" Project="Development" />
+      <BuildType Solution="Debug Editor|*" Project="Development" />
+      <BuildType Solution="Debug Server|*" Project="Development" />
+      <BuildType Solution="DebugGame Client|*" Project="Development" />
+      <BuildType Solution="DebugGame Editor|*" Project="Development" />
+      <BuildType Solution="DebugGame Server|*" Project="Development" />
+      <BuildType Solution="DebugGame|*" Project="Development" />
+      <BuildType Solution="Development Client|*" Project="Development" />
+      <BuildType Solution="Development Editor|*" Project="Development" />
+      <BuildType Solution="Development Server|*" Project="Development" />
+      <BuildType Solution="Shipping Client|*" Project="Development" />
+      <BuildType Solution="Shipping Server|*" Project="Development" />
+      <BuildType Solution="Shipping|*" Project="Development" />
+      <BuildType Solution="Test Client|*" Project="Development" />
+      <BuildType Solution="Test Server|*" Project="Development" />
+      <BuildType Solution="Test|*" Project="Development" />
+    </Project>
+    <Project Path="../../../clone/UnrealEngine/Engine/Source/Programs/Shared/EpicGames.MongoDB/EpicGames.MongoDB.csproj">
+      <BuildType Solution="Debug Client|*" Project="Development" />
+      <BuildType Solution="Debug Editor|*" Project="Development" />
+      <BuildType Solution="Debug Server|*" Project="Development" />
+      <BuildType Solution="DebugGame Client|*" Project="Development" />
+      <BuildType Solution="DebugGame Editor|*" Project="Development" />
+      <BuildType Solution="DebugGame Server|*" Project="Development" />
+      <BuildType Solution="DebugGame|*" Project="Development" />
+      <BuildType Solution="Development Client|*" Project="Development" />
+      <BuildType Solution="Development Editor|*" Project="Development" />
+      <BuildType Solution="Development Server|*" Project="Development" />
+      <BuildType Solution="Shipping Client|*" Project="Development" />
+      <BuildType Solution="Shipping Server|*" Project="Development" />
+      <BuildType Solution="Shipping|*" Project="Development" />
+      <BuildType Solution="Test Client|*" Project="Development" />
+      <BuildType Solution="Test Server|*" Project="Development" />
+      <BuildType Solution="Test|*" Project="Development" />
+    </Project>
+    <Project Path="../../../clone/UnrealEngine/Engine/Source/Programs/Shared/EpicGames.MsBuild/EpicGames.MsBuild.csproj">
+      <BuildType Solution="Debug Client|*" Project="Development" />
+      <BuildType Solution="Debug Editor|*" Project="Development" />
+      <BuildType Solution="Debug Server|*" Project="Development" />
+      <BuildType Solution="DebugGame Client|*" Project="Development" />
+      <BuildType Solution="DebugGame Editor|*" Project="Development" />
+      <BuildType Solution="DebugGame Server|*" Project="Development" />
+      <BuildType Solution="DebugGame|*" Project="Development" />
+      <BuildType Solution="Development Client|*" Project="Development" />
+      <BuildType Solution="Development Editor|*" Project="Development" />
+      <BuildType Solution="Development Server|*" Project="Development" />
+      <BuildType Solution="Shipping Client|*" Project="Development" />
+      <BuildType Solution="Shipping Server|*" Project="Development" />
+      <BuildType Solution="Shipping|*" Project="Development" />
+      <BuildType Solution="Test Client|*" Project="Development" />
+      <BuildType Solution="Test Server|*" Project="Development" />
+      <BuildType Solution="Test|*" Project="Development" />
+    </Project>
+    <Project Path="../../../clone/UnrealEngine/Engine/Source/Programs/Shared/EpicGames.OIDC/EpicGames.OIDC.csproj">
+      <BuildType Solution="Debug Client|*" Project="Development" />
+      <BuildType Solution="Debug Editor|*" Project="Development" />
+      <BuildType Solution="Debug Server|*" Project="Development" />
+      <BuildType Solution="DebugGame Client|*" Project="Development" />
+      <BuildType Solution="DebugGame Editor|*" Project="Development" />
+      <BuildType Solution="DebugGame Server|*" Project="Development" />
+      <BuildType Solution="DebugGame|*" Project="Development" />
+      <BuildType Solution="Development Client|*" Project="Development" />
+      <BuildType Solution="Development Editor|*" Project="Development" />
+      <BuildType Solution="Development Server|*" Project="Development" />
+      <BuildType Solution="Shipping Client|*" Project="Development" />
+      <BuildType Solution="Shipping Server|*" Project="Development" />
+      <BuildType Solution="Shipping|*" Project="Development" />
+      <BuildType Solution="Test Client|*" Project="Development" />
+      <BuildType Solution="Test Server|*" Project="Development" />
+      <BuildType Solution="Test|*" Project="Development" />
+    </Project>
+    <Project Path="../../../clone/UnrealEngine/Engine/Source/Programs/Shared/EpicGames.Oodle/EpicGames.Oodle.csproj">
+      <BuildType Solution="Debug Client|*" Project="Development" />
+      <BuildType Solution="Debug Editor|*" Project="Development" />
+      <BuildType Solution="Debug Server|*" Project="Development" />
+      <BuildType Solution="DebugGame Client|*" Project="Development" />
+      <BuildType Solution="DebugGame Editor|*" Project="Development" />
+      <BuildType Solution="DebugGame Server|*" Project="Development" />
+      <BuildType Solution="DebugGame|*" Project="Development" />
+      <BuildType Solution="Development Client|*" Project="Development" />
+      <BuildType Solution="Development Editor|*" Project="Development" />
+      <BuildType Solution="Development Server|*" Project="Development" />
+      <BuildType Solution="Shipping Client|*" Project="Development" />
+      <BuildType Solution="Shipping Server|*" Project="Development" />
+      <BuildType Solution="Shipping|*" Project="Development" />
+      <BuildType Solution="Test Client|*" Project="Development" />
+      <BuildType Solution="Test Server|*" Project="Development" />
+      <BuildType Solution="Test|*" Project="Development" />
+    </Project>
+    <Project Path="../../../clone/UnrealEngine/Engine/Source/Programs/Shared/EpicGames.Perforce.Fixture/EpicGames.Perforce.Fixture.csproj">
+      <BuildType Solution="Debug Client|*" Project="Development" />
+      <BuildType Solution="Debug Editor|*" Project="Development" />
+      <BuildType Solution="Debug Server|*" Project="Development" />
+      <BuildType Solution="DebugGame Client|*" Project="Development" />
+      <BuildType Solution="DebugGame Editor|*" Project="Development" />
+      <BuildType Solution="DebugGame Server|*" Project="Development" />
+      <BuildType Solution="DebugGame|*" Project="Development" />
+      <BuildType Solution="Development Client|*" Project="Development" />
+      <BuildType Solution="Development Editor|*" Project="Development" />
+      <BuildType Solution="Development Server|*" Project="Development" />
+      <BuildType Solution="Shipping Client|*" Project="Development" />
+      <BuildType Solution="Shipping Server|*" Project="Development" />
+      <BuildType Solution="Shipping|*" Project="Development" />
+      <BuildType Solution="Test Client|*" Project="Development" />
+      <BuildType Solution="Test Server|*" Project="Development" />
+      <BuildType Solution="Test|*" Project="Development" />
+    </Project>
+    <Project Path="../../../clone/UnrealEngine/Engine/Source/Programs/Shared/EpicGames.Perforce.Managed/EpicGames.Perforce.Managed.csproj">
+      <BuildType Solution="Debug Client|*" Project="Development" />
+      <BuildType Solution="Debug Editor|*" Project="Development" />
+      <BuildType Solution="Debug Server|*" Project="Development" />
+      <BuildType Solution="DebugGame Client|*" Project="Development" />
+      <BuildType Solution="DebugGame Editor|*" Project="Development" />
+      <BuildType Solution="DebugGame Server|*" Project="Development" />
+      <BuildType Solution="DebugGame|*" Project="Development" />
+      <BuildType Solution="Development Client|*" Project="Development" />
+      <BuildType Solution="Development Editor|*" Project="Development" />
+      <BuildType Solution="Development Server|*" Project="Development" />
+      <BuildType Solution="Shipping Client|*" Project="Development" />
+      <BuildType Solution="Shipping Server|*" Project="Development" />
+      <BuildType Solution="Shipping|*" Project="Development" />
+      <BuildType Solution="Test Client|*" Project="Development" />
+      <BuildType Solution="Test Server|*" Project="Development" />
+      <BuildType Solution="Test|*" Project="Development" />
+    </Project>
+    <Project Path="../../../clone/UnrealEngine/Engine/Source/Programs/Shared/EpicGames.Perforce/EpicGames.Perforce.csproj">
+      <BuildType Solution="Debug Client|*" Project="Development" />
+      <BuildType Solution="Debug Editor|*" Project="Development" />
+      <BuildType Solution="Debug Server|*" Project="Development" />
+      <BuildType Solution="DebugGame Client|*" Project="Development" />
+      <BuildType Solution="DebugGame Editor|*" Project="Development" />
+      <BuildType Solution="DebugGame Server|*" Project="Development" />
+      <BuildType Solution="DebugGame|*" Project="Development" />
+      <BuildType Solution="Development Client|*" Project="Development" />
+      <BuildType Solution="Development Editor|*" Project="Development" />
+      <BuildType Solution="Development Server|*" Project="Development" />
+      <BuildType Solution="Shipping Client|*" Project="Development" />
+      <BuildType Solution="Shipping Server|*" Project="Development" />
+      <BuildType Solution="Shipping|*" Project="Development" />
+      <BuildType Solution="Test Client|*" Project="Development" />
+      <BuildType Solution="Test Server|*" Project="Development" />
+      <BuildType Solution="Test|*" Project="Development" />
+    </Project>
+    <Project Path="../../../clone/UnrealEngine/Engine/Source/Programs/Shared/EpicGames.ProjectStore/EpicGames.ProjectStore.csproj">
+      <BuildType Solution="Debug Client|*" Project="Development" />
+      <BuildType Solution="Debug Editor|*" Project="Development" />
+      <BuildType Solution="Debug Server|*" Project="Development" />
+      <BuildType Solution="DebugGame Client|*" Project="Development" />
+      <BuildType Solution="DebugGame Editor|*" Project="Development" />
+      <BuildType Solution="DebugGame Server|*" Project="Development" />
+      <BuildType Solution="DebugGame|*" Project="Development" />
+      <BuildType Solution="Development Client|*" Project="Development" />
+      <BuildType Solution="Development Editor|*" Project="Development" />
+      <BuildType Solution="Development Server|*" Project="Development" />
+      <BuildType Solution="Shipping Client|*" Project="Development" />
+      <BuildType Solution="Shipping Server|*" Project="Development" />
+      <BuildType Solution="Shipping|*" Project="Development" />
+      <BuildType Solution="Test Client|*" Project="Development" />
+      <BuildType Solution="Test Server|*" Project="Development" />
+      <BuildType Solution="Test|*" Project="Development" />
+    </Project>
+    <Project Path="../../../clone/UnrealEngine/Engine/Source/Programs/Shared/EpicGames.Redis/EpicGames.Redis.csproj">
+      <BuildType Solution="Debug Client|*" Project="Development" />
+      <BuildType Solution="Debug Editor|*" Project="Development" />
+      <BuildType Solution="Debug Server|*" Project="Development" />
+      <BuildType Solution="DebugGame Client|*" Project="Development" />
+      <BuildType Solution="DebugGame Editor|*" Project="Development" />
+      <BuildType Solution="DebugGame Server|*" Project="Development" />
+      <BuildType Solution="DebugGame|*" Project="Development" />
+      <BuildType Solution="Development Client|*" Project="Development" />
+      <BuildType Solution="Development Editor|*" Project="Development" />
+      <BuildType Solution="Development Server|*" Project="Development" />
+      <BuildType Solution="Shipping Client|*" Project="Development" />
+      <BuildType Solution="Shipping Server|*" Project="Development" />
+      <BuildType Solution="Shipping|*" Project="Development" />
+      <BuildType Solution="Test Client|*" Project="Development" />
+      <BuildType Solution="Test Server|*" Project="Development" />
+      <BuildType Solution="Test|*" Project="Development" />
+    </Project>
+    <Project Path="../../../clone/UnrealEngine/Engine/Source/Programs/Shared/EpicGames.ScriptBuild/EpicGames.ScriptBuild.csproj">
+      <BuildType Solution="Debug Client|*" Project="Development" />
+      <BuildType Solution="Debug Editor|*" Project="Development" />
+      <BuildType Solution="Debug Server|*" Project="Development" />
+      <BuildType Solution="DebugGame Client|*" Project="Development" />
+      <BuildType Solution="DebugGame Editor|*" Project="Development" />
+      <BuildType Solution="DebugGame Server|*" Project="Development" />
+      <BuildType Solution="DebugGame|*" Project="Development" />
+      <BuildType Solution="Development Client|*" Project="Development" />
+      <BuildType Solution="Development Editor|*" Project="Development" />
+      <BuildType Solution="Development Server|*" Project="Development" />
+      <BuildType Solution="Shipping Client|*" Project="Development" />
+      <BuildType Solution="Shipping Server|*" Project="Development" />
+      <BuildType Solution="Shipping|*" Project="Development" />
+      <BuildType Solution="Test Client|*" Project="Development" />
+      <BuildType Solution="Test Server|*" Project="Development" />
+      <BuildType Solution="Test|*" Project="Development" />
+    </Project>
+    <Project Path="../../../clone/UnrealEngine/Engine/Source/Programs/Shared/EpicGames.Serialization/EpicGames.Serialization.csproj">
+      <BuildType Solution="Debug Client|*" Project="Development" />
+      <BuildType Solution="Debug Editor|*" Project="Development" />
+      <BuildType Solution="Debug Server|*" Project="Development" />
+      <BuildType Solution="DebugGame Client|*" Project="Development" />
+      <BuildType Solution="DebugGame Editor|*" Project="Development" />
+      <BuildType Solution="DebugGame Server|*" Project="Development" />
+      <BuildType Solution="DebugGame|*" Project="Development" />
+      <BuildType Solution="Development Client|*" Project="Development" />
+      <BuildType Solution="Development Editor|*" Project="Development" />
+      <BuildType Solution="Development Server|*" Project="Development" />
+      <BuildType Solution="Shipping Client|*" Project="Development" />
+      <BuildType Solution="Shipping Server|*" Project="Development" />
+      <BuildType Solution="Shipping|*" Project="Development" />
+      <BuildType Solution="Test Client|*" Project="Development" />
+      <BuildType Solution="Test Server|*" Project="Development" />
+      <BuildType Solution="Test|*" Project="Development" />
+    </Project>
+    <Project Path="../../../clone/UnrealEngine/Engine/Source/Programs/Shared/EpicGames.Slack/EpicGames.Slack.csproj">
+      <BuildType Solution="Debug Client|*" Project="Development" />
+      <BuildType Solution="Debug Editor|*" Project="Development" />
+      <BuildType Solution="Debug Server|*" Project="Development" />
+      <BuildType Solution="DebugGame Client|*" Project="Development" />
+      <BuildType Solution="DebugGame Editor|*" Project="Development" />
+      <BuildType Solution="DebugGame Server|*" Project="Development" />
+      <BuildType Solution="DebugGame|*" Project="Development" />
+      <BuildType Solution="Development Client|*" Project="Development" />
+      <BuildType Solution="Development Editor|*" Project="Development" />
+      <BuildType Solution="Development Server|*" Project="Development" />
+      <BuildType Solution="Shipping Client|*" Project="Development" />
+      <BuildType Solution="Shipping Server|*" Project="Development" />
+      <BuildType Solution="Shipping|*" Project="Development" />
+      <BuildType Solution="Test Client|*" Project="Development" />
+      <BuildType Solution="Test Server|*" Project="Development" />
+      <BuildType Solution="Test|*" Project="Development" />
+    </Project>
+    <Project Path="../../../clone/UnrealEngine/Engine/Source/Programs/Shared/EpicGames.Tracing/EpicGames.Tracing.csproj">
+      <BuildType Solution="Debug Client|*" Project="Development" />
+      <BuildType Solution="Debug Editor|*" Project="Development" />
+      <BuildType Solution="Debug Server|*" Project="Development" />
+      <BuildType Solution="DebugGame Client|*" Project="Development" />
+      <BuildType Solution="DebugGame Editor|*" Project="Development" />
+      <BuildType Solution="DebugGame Server|*" Project="Development" />
+      <BuildType Solution="DebugGame|*" Project="Development" />
+      <BuildType Solution="Development Client|*" Project="Development" />
+      <BuildType Solution="Development Editor|*" Project="Development" />
+      <BuildType Solution="Development Server|*" Project="Development" />
+      <BuildType Solution="Shipping Client|*" Project="Development" />
+      <BuildType Solution="Shipping Server|*" Project="Development" />
+      <BuildType Solution="Shipping|*" Project="Development" />
+      <BuildType Solution="Test Client|*" Project="Development" />
+      <BuildType Solution="Test Server|*" Project="Development" />
+      <BuildType Solution="Test|*" Project="Development" />
+    </Project>
+    <Project Path="../../../clone/UnrealEngine/Engine/Source/Programs/Shared/EpicGames.UBA/EpicGames.UBA.csproj">
+      <BuildType Solution="Debug Client|*" Project="Development" />
+      <BuildType Solution="Debug Editor|*" Project="Development" />
+      <BuildType Solution="Debug Server|*" Project="Development" />
+      <BuildType Solution="DebugGame Client|*" Project="Development" />
+      <BuildType Solution="DebugGame Editor|*" Project="Development" />
+      <BuildType Solution="DebugGame Server|*" Project="Development" />
+      <BuildType Solution="DebugGame|*" Project="Development" />
+      <BuildType Solution="Development Client|*" Project="Development" />
+      <BuildType Solution="Development Editor|*" Project="Development" />
+      <BuildType Solution="Development Server|*" Project="Development" />
+      <BuildType Solution="Shipping Client|*" Project="Development" />
+      <BuildType Solution="Shipping Server|*" Project="Development" />
+      <BuildType Solution="Shipping|*" Project="Development" />
+      <BuildType Solution="Test Client|*" Project="Development" />
+      <BuildType Solution="Test Server|*" Project="Development" />
+      <BuildType Solution="Test|*" Project="Development" />
+    </Project>
+    <Project Path="../../../clone/UnrealEngine/Engine/Source/Programs/Shared/EpicGames.UHT/EpicGames.UHT.csproj">
+      <BuildType Solution="Debug Client|*" Project="Development" />
+      <BuildType Solution="Debug Editor|*" Project="Development" />
+      <BuildType Solution="Debug Server|*" Project="Development" />
+      <BuildType Solution="DebugGame Client|*" Project="Development" />
+      <BuildType Solution="DebugGame Editor|*" Project="Development" />
+      <BuildType Solution="DebugGame Server|*" Project="Development" />
+      <BuildType Solution="DebugGame|*" Project="Development" />
+      <BuildType Solution="Development Client|*" Project="Development" />
+      <BuildType Solution="Development Editor|*" Project="Development" />
+      <BuildType Solution="Development Server|*" Project="Development" />
+      <BuildType Solution="Shipping Client|*" Project="Development" />
+      <BuildType Solution="Shipping Server|*" Project="Development" />
+      <BuildType Solution="Shipping|*" Project="Development" />
+      <BuildType Solution="Test Client|*" Project="Development" />
+      <BuildType Solution="Test Server|*" Project="Development" />
+      <BuildType Solution="Test|*" Project="Development" />
+    </Project>
+  </Folder>
+  <Folder Name="/Programs/UnrealBuildTool.Plugins/">
+    <Project Path="../../../clone/UnrealEngine/Engine/Plugins/ScriptPlugin/Source/ScriptGeneratorUbtPlugin/ScriptGeneratorUbtPlugin.ubtplugin.csproj">
+      <BuildType Solution="Debug Client|*" Project="Development" />
+      <BuildType Solution="Debug Editor|*" Project="Development" />
+      <BuildType Solution="Debug Server|*" Project="Development" />
+      <BuildType Solution="DebugGame Client|*" Project="Development" />
+      <BuildType Solution="DebugGame Editor|*" Project="Development" />
+      <BuildType Solution="DebugGame Server|*" Project="Development" />
+      <BuildType Solution="DebugGame|*" Project="Development" />
+      <BuildType Solution="Development Client|*" Project="Development" />
+      <BuildType Solution="Development Editor|*" Project="Development" />
+      <BuildType Solution="Development Server|*" Project="Development" />
+      <BuildType Solution="Shipping Client|*" Project="Development" />
+      <BuildType Solution="Shipping Server|*" Project="Development" />
+      <BuildType Solution="Shipping|*" Project="Development" />
+      <BuildType Solution="Test Client|*" Project="Development" />
+      <BuildType Solution="Test Server|*" Project="Development" />
+      <BuildType Solution="Test|*" Project="Development" />
+    </Project>
+  </Folder>
+  <Folder Name="/Rules/">
+    <Project Path="../../../clone/UnrealEngine/Engine/Intermediate/Build/BuildRulesProjects/UE5ProgramRules/UE5ProgramRules.csproj">
+      <BuildType Solution="Debug Client|*" Project="Development" />
+      <BuildType Solution="Debug Editor|*" Project="Development" />
+      <BuildType Solution="Debug Server|*" Project="Development" />
+      <BuildType Solution="DebugGame Client|*" Project="Development" />
+      <BuildType Solution="DebugGame Editor|*" Project="Development" />
+      <BuildType Solution="DebugGame Server|*" Project="Development" />
+      <BuildType Solution="DebugGame|*" Project="Development" />
+      <BuildType Solution="Development Client|*" Project="Development" />
+      <BuildType Solution="Development Editor|*" Project="Development" />
+      <BuildType Solution="Development Server|*" Project="Development" />
+      <BuildType Solution="Shipping Client|*" Project="Development" />
+      <BuildType Solution="Shipping Server|*" Project="Development" />
+      <BuildType Solution="Shipping|*" Project="Development" />
+      <BuildType Solution="Test Client|*" Project="Development" />
+      <BuildType Solution="Test Server|*" Project="Development" />
+      <BuildType Solution="Test|*" Project="Development" />
+    </Project>
+    <Project Path="../../../clone/UnrealEngine/Engine/Intermediate/Build/BuildRulesProjects/UE5Rules/UE5Rules.csproj">
+      <BuildType Solution="Debug Client|*" Project="Development" />
+      <BuildType Solution="Debug Editor|*" Project="Development" />
+      <BuildType Solution="Debug Server|*" Project="Development" />
+      <BuildType Solution="DebugGame Client|*" Project="Development" />
+      <BuildType Solution="DebugGame Editor|*" Project="Development" />
+      <BuildType Solution="DebugGame Server|*" Project="Development" />
+      <BuildType Solution="DebugGame|*" Project="Development" />
+      <BuildType Solution="Development Client|*" Project="Development" />
+      <BuildType Solution="Development Editor|*" Project="Development" />
+      <BuildType Solution="Development Server|*" Project="Development" />
+      <BuildType Solution="Shipping Client|*" Project="Development" />
+      <BuildType Solution="Shipping Server|*" Project="Development" />
+      <BuildType Solution="Shipping|*" Project="Development" />
+      <BuildType Solution="Test Client|*" Project="Development" />
+      <BuildType Solution="Test Server|*" Project="Development" />
+      <BuildType Solution="Test|*" Project="Development" />
+    </Project>
+    <Project Path="Intermediate/Build/BuildRulesProjects/ClipmapTerrainModuleRules/ClipmapTerrainModuleRules.csproj">
+      <BuildType Solution="Debug Client|*" Project="Development" />
+      <BuildType Solution="Debug Editor|*" Project="Development" />
+      <BuildType Solution="Debug Server|*" Project="Development" />
+      <BuildType Solution="DebugGame Client|*" Project="Development" />
+      <BuildType Solution="DebugGame Editor|*" Project="Development" />
+      <BuildType Solution="DebugGame Server|*" Project="Development" />
+      <BuildType Solution="DebugGame|*" Project="Development" />
+      <BuildType Solution="Development Client|*" Project="Development" />
+      <BuildType Solution="Development Editor|*" Project="Development" />
+      <BuildType Solution="Development Server|*" Project="Development" />
+      <BuildType Solution="Shipping Client|*" Project="Development" />
+      <BuildType Solution="Shipping Server|*" Project="Development" />
+      <BuildType Solution="Shipping|*" Project="Development" />
+      <BuildType Solution="Test Client|*" Project="Development" />
+      <BuildType Solution="Test Server|*" Project="Development" />
+      <BuildType Solution="Test|*" Project="Development" />
+    </Project>
+  </Folder>
+  <Folder Name="/Visualizers/">
+    <File Path="../../../clone/UnrealEngine/Engine/Extras/VisualStudioDebugging/Unreal.natjmc" />
+    <File Path="../../../clone/UnrealEngine/Engine/Extras/VisualStudioDebugging/Unreal.natstepfilter" />
+    <File Path="../../../clone/UnrealEngine/Engine/Extras/VisualStudioDebugging/Unreal.natvis" />
+  </Folder>
+  <Properties Name="ddbf523f-7eb6-4887-bd51-85a714ff87eb">
+    <Property Name="AvailablePlatforms" Value="Win64;Android;Linux;LinuxArm64" />
+  </Properties>
+</Solution>
