@@ -3,6 +3,7 @@
 #include "CoreMinimal.h"
 #include "Components/InstancedStaticMeshComponent.h"
 #include "ClipmapTypes.h"
+#include "FastNoise.h"
 #include "ClipmapTerrainActor.generated.h"
 
 
@@ -48,8 +49,14 @@ class CLIPMAPTERRAIN_API AClipmapTerrainActor : public AActor
 	void InitClipmap();
 	void GenerateMesh();
 	void UpdateClipmap();
+	void UpdateClipmapLevels();
 	void UpdateWindowTexture();
+	void ChunksToWindow(int level, double xOffset, double yOffset, double x1, double x2, double y1, double y2);
+	void GenHeightmap(int x, int y, int level, FRandomTerrainChunk& chunk);
+	void UpdateClipmapBounds();
+	void EmplaceWindowRegion(UTexture2D* Heightmap, int level, double destX, double destY, int srcX, int srcY, int sizeX, int sizeY);
 	FVector GetLocalCameraLocation() const;
+	FRandomTerrainChunkKey& GetChunk(int x, int y);
 public:
 
 	AClipmapTerrainActor();
@@ -99,17 +106,27 @@ public:
 	double HeightScale = 100;
 
 	//Procedural gen info
-	int ChunkSize = 128;
-
+	int ChunkSize = 64;
+	UPROPERTY(transient, VisibleAnywhere, BlueprintReadOnly)
+	TArray<FRandomTerrainChunk> Chunks;
+	UPROPERTY(BlueprintReadWrite, EditInstanceOnly, Category = "Generation Settings")
+	FString FastNoiseEncodedString = "AwQ=";
 private:
+	bool bBoundsNeedsUpdate = false;
+
+	double MinHeight = 0;
+	double MaxHeight = 0;
 
 	uint32 CurrentChunkId = 0;
 
-
+	
 	UPROPERTY(transient)
 	TMap<FIntVector2, FRandomTerrainChunkKey> ChunkMap;
-	TArray<FRandomTerrainChunk> Chunks;
+	
 
+	TArray<TPair<FIntVector2, FRandomTerrainChunkKey>> ChunksToUpdate;
+
+	TArray<FUpdateHeightmapRegion> QueuedUpdateRegions;
 	//Static mesh instance ID's
 	FClipmapMeshPiece CrossInstanceID;
 	TArray<FClipmapMeshPiece> TileMap;
@@ -117,9 +134,19 @@ private:
 	TArray<FClipmapMeshPiece> Trims;
 	TArray<FClipmapMeshPiece> Seams;
 
+	TObjectPtr<UStaticMesh> CrossMeshSection;
+	TObjectPtr<UStaticMesh> TileMeshSection;
+	TObjectPtr<UStaticMesh> FillerMeshSection;
+	TObjectPtr<UStaticMesh> TrimMeshSection;
+	TObjectPtr<UStaticMesh> SeamMeshSection;
+
+	
+
 	FVector LastViewGridPosition;
 	FVector ViewGridMovement;
 
 	bool bFirstUpdate = true;
+
+	FastNoise::SmartNode<> NoiseNode;
 	
 };

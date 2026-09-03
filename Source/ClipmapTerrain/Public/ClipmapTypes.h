@@ -14,18 +14,23 @@ struct FRandomTerrainChunkKey
 	bool bValid;
 };
 
-USTRUCT()
+USTRUCT(BlueprintType)
 struct FRandomTerrainChunk
 {
 	GENERATED_BODY()
 
-	UPROPERTY(transient)
+	UPROPERTY(transient, VisibleAnywhere, BlueprintReadOnly)
 	TArray<TObjectPtr<UTexture2D>> Heightmap;
+
+	TArray<float*> HeightmapBuffers;
 
 	Chaos::FHeightFieldPtr HeightField;
 
-	bool bLevelMaskInit = false;
-	TBitArray<> LevelMask;
+	bool bValid = false;
+	bool bGenerating = false;
+
+	double MinHeight = 0;
+	double MaxHeight = 0;
 };
 
 struct FUpdateHeightmapRegion
@@ -46,7 +51,7 @@ struct FUpdateHeightmapRegion
 		Region.SourcePosition.X = InSrcX;
 		Region.SourcePosition.Y = InSrcY;
 
-		Region.SourceMipIndex = mipIndex;
+		Region.SourceMipIndex = 0;
 		Region.DestSliceIndex = mipIndex;
 		Region.DestMipIndex = 0;
 	}
