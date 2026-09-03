@@ -19,17 +19,19 @@ struct FRandomTerrainChunk
 {
 	GENERATED_BODY()
 
-	UPROPERTY(transient, VisibleAnywhere, BlueprintReadOnly)
+	UPROPERTY(transient)
 	TArray<TObjectPtr<UTexture2D>> Heightmap;
 
-	UPROPERTY(transient, VisibleAnywhere, BlueprintReadOnly)
+	UPROPERTY(transient)
 	TArray<TObjectPtr<UTexture2D>> Normalmap;
+
+	TBitArray<> DirtyLevels;
+	TBitArray<> LevelMask;
 
 	TArray<float*> HeightmapBuffers;
 	TArray<FFloat16Color*> NormalmapBuffers;
 	Chaos::FHeightFieldPtr HeightField;
 
-	bool bValid = false;
 	bool bGenerating = false;
 
 	double MinHeight = 0;
@@ -41,12 +43,10 @@ struct FUpdateHeightmapRegion
 	int MipIndex;
 	FRHICopyTextureInfo Region;
 	UTexture2D* SourceTexture;
-	UTexture2D* NormalSourceTexture;
 	FUpdateHeightmapRegion() {};
 
-	FUpdateHeightmapRegion(UTexture2D* normalSourceTexture,UTexture2D* sourceTexture, int mipIndex, uint32 InDestX, uint32 InDestY, int32 InSrcX, int32 InSrcY, uint32 InWidth, uint32 InHeight) :
+	FUpdateHeightmapRegion(UTexture2D* sourceTexture, int mipIndex, uint32 InDestX, uint32 InDestY, int32 InSrcX, int32 InSrcY, uint32 InWidth, uint32 InHeight) :
 		MipIndex(mipIndex),
-		NormalSourceTexture(normalSourceTexture),
 		SourceTexture(sourceTexture)
 	{
 		Region.Size.X = InWidth;

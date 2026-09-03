@@ -82,7 +82,7 @@ void AClipmapTerrainActor::PostEditChangeProperty(FPropertyChangedEvent& event)
 {
 	Super::PostEditChangeProperty(event);
 
-	if (event.GetPropertyName() == "TileSize" || event.GetPropertyName() == "ClipmapLevels")
+	if (event.GetPropertyName() == "ClipmapTileSize" || event.GetPropertyName() == "ClipmapLevels" || event.GetPropertyName() == "HeightScale" || event.GetPropertyName() == "Seed" || event.GetPropertyName() == "ChunkSize" || event.GetPropertyName() == "FastNoiseEncodedString")
 	{
 		bClipmapDirty = true;
 	}
@@ -136,6 +136,7 @@ void AClipmapTerrainActor::InitClipmap()
 	Seams.SetNum(ClipmapLevels);
 
 
+
 	GenerateMesh();
 
 	if (Material)
@@ -147,7 +148,7 @@ void AClipmapTerrainActor::InitClipmap()
 	{
 
 		ClipmapMaterial->SetTextureParameterValue("WindowTexture", WindowTexture);
-		ClipmapMaterial->SetTextureParameterValue("NormalWindowTexture", NormalWindowTexture);
+		//ClipmapMaterial->SetTextureParameterValue("NormalWindowTexture", NormalWindowTexture);
 		ClipmapMaterial->SetScalarParameterValue("HeightScale", HeightScale * 100.0);
 		ClipmapMaterial->SetScalarParameterValue("WindowSize", ClipmapTileSize * 4);
 		ClipmapMaterial->SetScalarParameterValue("NumLevels", ClipmapLevels);
@@ -340,6 +341,7 @@ FVector AClipmapTerrainActor::GetNormal(double x, double y,double step)
 }
 FVector AClipmapTerrainActor::GetNormalUnsafe(int x, int y, float* buffer)
 {
+
 	float L = buffer[y * ChunkSize + (x - 1)] * HeightScale;
 	float R = buffer[y * ChunkSize + (x + 1)] * HeightScale;
 	float U = buffer[(y+1) * ChunkSize + x] * HeightScale;
@@ -352,7 +354,7 @@ void AClipmapTerrainActor::GenHeightmap(int x, int y, int level, FRandomTerrainC
 	double scalar = FMath::Pow(2.0, level);
 
 	float* pixels = chunk.HeightmapBuffers[level];
-	FFloat16Color* normals = chunk.NormalmapBuffers[level];
+	//FFloat16Color* normals = chunk.NormalmapBuffers[level];
 	double startX = (x) * ChunkSize * scalar;
 	double startY = (y) * ChunkSize * scalar;
 
@@ -361,136 +363,136 @@ void AClipmapTerrainActor::GenHeightmap(int x, int y, int level, FRandomTerrainC
 
 
 	NoiseNode->GenUniformGrid2D(pixels, startX, startY, ChunkSize, ChunkSize, scalar, scalar, Seed);
-	for (int i = 1; i < ChunkSize-1; i++)
-	{
-		for (int t = 0; t < 2; t++)
-		{
-			int leftId = i * ChunkSize + t;
-			int rightId = i * ChunkSize + (ChunkSize - 1 - t);
-			{
-				FVector normal = FVector::ZeroVector;
-				int nY = i;
-				int nX = t;
-				for (int oX = 0; oX < 3; oX++)
-				{
-					for (int oY = 0; oY < 3; oY++)
-					{
-						double cX = startX + (nX * scalar) + (oX - 1) * scalar;
-						double cY = startY + (nY * scalar) + (oY - 1) * scalar;
-						normal += GetNormal(cX, cY, scalar).GetSafeNormal();
-					}
-				}
-				FFloat16Color& outColor = normals[leftId];
-				normal /= (3.0 * 3.0);
-				normal.Normalize();
-				outColor.R = 0.5f + normal.X * 0.5f; //(normalSum.X * 127) + 128;
-				outColor.G = 0.5f + normal.Y * 0.5f;//(normalSum.Y * 127) + 128;
-				outColor.B = 0.5f + normal.Z * 0.5f;//(normalSum.Z * 127) + 128;
-				outColor.A = 1;
-			}
-			{
-				FVector normal = FVector::ZeroVector;
-				int nY = i;
-				int nX = ChunkSize - 1 - t;
-				for (int oX = 0; oX < 3; oX++)
-				{
-					for (int oY = 0; oY < 3; oY++)
-					{
-						double cX = startX + (nX * scalar) + (oX - 1) * scalar;
-						double cY = startY + (nY * scalar) + (oY - 1) * scalar;
-						normal += GetNormal(cX, cY, scalar).GetSafeNormal();
-					}
-				}
-				FFloat16Color& outColor = normals[rightId];
-				normal /= (3.0 * 3.0);
-				normal.Normalize();
-				outColor.R = 0.5f + normal.X * 0.5f; //(normalSum.X * 127) + 128;
-				outColor.G = 0.5f + normal.Y * 0.5f;//(normalSum.Y * 127) + 128;
-				outColor.B = 0.5f + normal.Z * 0.5f;//(normalSum.Z * 127) + 128;
-				outColor.A = 1;
-			}
-		}
-	}
-	for (int i = 0; i < ChunkSize; i++)
-	{
-		for (int t = 0; t < 2; t++)
-		{
-		int topId = (ChunkSize - 1 - t) * ChunkSize + i;
-		
-		
+	//for (int i = 1; i < ChunkSize-1; i++)
+	//{
+	//	for (int t = 0; t < 2; t++)
+	//	{
+	//		int leftId = i * ChunkSize + t;
+	//		int rightId = i * ChunkSize + (ChunkSize - 1 - t);
+	//		{
+	//			FVector normal = FVector::ZeroVector;
+	//			int nY = i;
+	//			int nX = t;
+	//			for (int oX = 0; oX < 3; oX++)
+	//			{
+	//				for (int oY = 0; oY < 3; oY++)
+	//				{
+	//					double cX = startX + (nX * scalar) + (oX - 1) * scalar;
+	//					double cY = startY + (nY * scalar) + (oY - 1) * scalar;
+	//					normal += GetNormal(cX, cY, scalar).GetSafeNormal();
+	//				}
+	//			}
+	//			FFloat16Color& outColor = normals[leftId];
+	//			normal /= (3.0 * 3.0);
+	//			normal.Normalize();
+	//			outColor.R = 0.5f + normal.X * 0.5f; //(normalSum.X * 127) + 128;
+	//			outColor.G = 0.5f + normal.Y * 0.5f;//(normalSum.Y * 127) + 128;
+	//			outColor.B = 0.5f + normal.Z * 0.5f;//(normalSum.Z * 127) + 128;
+	//			outColor.A = 1;
+	//		}
+	//		{
+	//			FVector normal = FVector::ZeroVector;
+	//			int nY = i;
+	//			int nX = ChunkSize - 1 - t;
+	//			for (int oX = 0; oX < 3; oX++)
+	//			{
+	//				for (int oY = 0; oY < 3; oY++)
+	//				{
+	//					double cX = startX + (nX * scalar) + (oX - 1) * scalar;
+	//					double cY = startY + (nY * scalar) + (oY - 1) * scalar;
+	//					normal += GetNormal(cX, cY, scalar).GetSafeNormal();
+	//				}
+	//			}
+	//			FFloat16Color& outColor = normals[rightId];
+	//			normal /= (3.0 * 3.0);
+	//			normal.Normalize();
+	//			outColor.R = 0.5f + normal.X * 0.5f; //(normalSum.X * 127) + 128;
+	//			outColor.G = 0.5f + normal.Y * 0.5f;//(normalSum.Y * 127) + 128;
+	//			outColor.B = 0.5f + normal.Z * 0.5f;//(normalSum.Z * 127) + 128;
+	//			outColor.A = 1;
+	//		}
+	//	}
+	//}
+	//for (int i = 0; i < ChunkSize; i++)
+	//{
+	//	for (int t = 0; t < 2; t++)
+	//	{
+	//	int topId = (ChunkSize - 1 - t) * ChunkSize + i;
+	//	
+	//	
 
-			{
-				FVector normal = FVector::ZeroVector;
-				int nY = ChunkSize - 1 - t;
-				int nX = i;
-				for (int oX = 0; oX < 3; oX++)
-				{
-					for (int oY = 0; oY < 3; oY++)
-					{
-						double cX = startX + (nX * scalar) + (oX - 1) * scalar;
-						double cY = startY + (nY * scalar) + (oY - 1) * scalar;
-						normal += GetNormal(cX, cY, scalar).GetSafeNormal();
-					}
-				}
-				FFloat16Color& outColor = normals[topId];
-				normal /= (3.0 * 3.0);
-				normal.Normalize();
-				outColor.R = 0.5f + normal.X * 0.5f; //(normalSum.X * 127) + 128;
-				outColor.G = 0.5f + normal.Y * 0.5f;//(normalSum.Y * 127) + 128;
-				outColor.B = 0.5f + normal.Z * 0.5f;//(normalSum.Z * 127) + 128;
-				outColor.A = 1;
-			}
-			{
-				FVector normal = FVector::ZeroVector;
-				int nY = t;
-				int nX = i;
-				for (int oX = 0; oX < 3; oX++)
-				{
-					for (int oY = 0; oY < 3; oY++)
-					{
-						double cX = startX + (nX * scalar) + (oX - 1) * scalar;
-						double cY = startY + (nY * scalar) + (oY - 1) * scalar;
-						normal += GetNormal(cX, cY, scalar).GetSafeNormal();
-					}
-				}
-				FFloat16Color& outColor = normals[t*ChunkSize+nX];
-				normal /= (3.0 * 3.0);
-				normal.Normalize();
-				outColor.R = 0.5f + normal.X * 0.5f; //(normalSum.X * 127) + 128;
-				outColor.G = 0.5f + normal.Y * 0.5f;//(normalSum.Y * 127) + 128;
-				outColor.B = 0.5f + normal.Z * 0.5f;//(normalSum.Z * 127) + 128;
-				outColor.A = 1;
-			}
-		}
-	}
+	//		{
+	//			FVector normal = FVector::ZeroVector;
+	//			int nY = ChunkSize - 1 - t;
+	//			int nX = i;
+	//			for (int oX = 0; oX < 3; oX++)
+	//			{
+	//				for (int oY = 0; oY < 3; oY++)
+	//				{
+	//					double cX = startX + (nX * scalar) + (oX - 1) * scalar;
+	//					double cY = startY + (nY * scalar) + (oY - 1) * scalar;
+	//					normal += GetNormal(cX, cY, scalar).GetSafeNormal();
+	//				}
+	//			}
+	//			FFloat16Color& outColor = normals[topId];
+	//			normal /= (3.0 * 3.0);
+	//			normal.Normalize();
+	//			outColor.R = 0.5f + normal.X * 0.5f; //(normalSum.X * 127) + 128;
+	//			outColor.G = 0.5f + normal.Y * 0.5f;//(normalSum.Y * 127) + 128;
+	//			outColor.B = 0.5f + normal.Z * 0.5f;//(normalSum.Z * 127) + 128;
+	//			outColor.A = 1;
+	//		}
+	//		{
+	//			FVector normal = FVector::ZeroVector;
+	//			int nY = t;
+	//			int nX = i;
+	//			for (int oX = 0; oX < 3; oX++)
+	//			{
+	//				for (int oY = 0; oY < 3; oY++)
+	//				{
+	//					double cX = startX + (nX * scalar) + (oX - 1) * scalar;
+	//					double cY = startY + (nY * scalar) + (oY - 1) * scalar;
+	//					normal += GetNormal(cX, cY, scalar).GetSafeNormal();
+	//				}
+	//			}
+	//			FFloat16Color& outColor = normals[t*ChunkSize+nX];
+	//			normal /= (3.0 * 3.0);
+	//			normal.Normalize();
+	//			outColor.R = 0.5f + normal.X * 0.5f; //(normalSum.X * 127) + 128;
+	//			outColor.G = 0.5f + normal.Y * 0.5f;//(normalSum.Y * 127) + 128;
+	//			outColor.B = 0.5f + normal.Z * 0.5f;//(normalSum.Z * 127) + 128;
+	//			outColor.A = 1;
+	//		}
+	//	}
+	//}
 
-	for (int nY = 2; nY < ChunkSize-2; nY++)
-	{
-		for (int nX = 2; nX < ChunkSize-2; nX++)
-		{
-			FFloat16Color& outColor = normals[nY * ChunkSize + nX];
-			FVector normal = FVector::ZeroVector;// = GetNormal(startX + nX * scalar, startY + nY * scalar, scalar);
-			for (int oX = 0; oX < 3; oX++)
-			{
-				for (int oY = 0; oY < 3; oY++)
-				{
-					int cX = nX + oX - 1;
-					int cY = nY + oY - 1;
-					normal += GetNormalUnsafe(cX, cY, pixels).GetSafeNormal();
-				}
-			}
-			normal /= (3.0 * 3.0);
-			normal.Normalize();
-			outColor.R = 0.5f + normal.X * 0.5f; //(normalSum.X * 127) + 128;
-			outColor.G = 0.5f + normal.Y * 0.5f;//(normalSum.Y * 127) + 128;
-			outColor.B = 0.5f + normal.Z * 0.5f;//(normalSum.Z * 127) + 128;
-			outColor.A = 1;
-		}
-	}
+	//for (int nY = 2; nY < ChunkSize-2; nY++)
+	//{
+	//	for (int nX = 2; nX < ChunkSize-2; nX++)
+	//	{
+	//		FFloat16Color& outColor = normals[nY * ChunkSize + nX];
+	//		FVector normal = FVector::ZeroVector;// = GetNormal(startX + nX * scalar, startY + nY * scalar, scalar);
+	//		for (int oX = 0; oX < 3; oX++)
+	//		{
+	//			for (int oY = 0; oY < 3; oY++)
+	//			{
+	//				int cX = nX + oX - 1;
+	//				int cY = nY + oY - 1;
+	//				normal += GetNormalUnsafe(cX, cY, pixels).GetSafeNormal();
+	//			}
+	//		}
+	//		normal /= (3.0 * 3.0);
+	//		normal.Normalize();
+	//		outColor.R = 0.5f + normal.X * 0.5f; //(normalSum.X * 127) + 128;
+	//		outColor.G = 0.5f + normal.Y * 0.5f;//(normalSum.Y * 127) + 128;
+	//		outColor.B = 0.5f + normal.Z * 0.5f;//(normalSum.Z * 127) + 128;
+	//		outColor.A = 1;
+	//	}
+	//}
 
-	chunk.bValid = true;
+	
 	chunk.bGenerating = false;
-
+	chunk.LevelMask[level] = true;
 	if (level == 0)
 	{
 		for (int i = 0; i < ChunkSize * ChunkSize; i++)
@@ -529,7 +531,7 @@ void AClipmapTerrainActor::UpdateClipmapBounds()
 	TrimMeshSection->CalculateExtendedBounds();
 	SeamMeshSection->CalculateExtendedBounds();
 }
-void AClipmapTerrainActor::EmplaceWindowRegion(UTexture2D* Normalmap, UTexture2D* Heightmap, int level,double destX, double destY, int srcX, int srcY, int sizeX, int sizeY)
+void AClipmapTerrainActor::EmplaceWindowRegion(UTexture2D* Heightmap, int level,double destX, double destY, int srcX, int srcY, int sizeX, int sizeY)
 {
 	struct FSegment
 	{
@@ -574,7 +576,7 @@ void AClipmapTerrainActor::EmplaceWindowRegion(UTexture2D* Normalmap, UTexture2D
 	{
 		for (const FSegment& ySeg : ySegs)
 		{
-			QueuedUpdateRegions.Emplace(Normalmap,Heightmap, level, xSeg.dest, ySeg.dest, xSeg.src, ySeg.src, xSeg.size, ySeg.size);
+			QueuedUpdateRegions.Emplace(Heightmap, level, xSeg.dest, ySeg.dest, xSeg.src, ySeg.src, xSeg.size, ySeg.size);
 		}
 	}
 }
@@ -594,11 +596,17 @@ void AClipmapTerrainActor::ChunksToWindow(int level, double xOffset, double yOff
 			FRandomTerrainChunkKey& key = GetChunk(x, y);
 			FRandomTerrainChunk& chunk = Chunks[key.Index];
 
-			if (!chunk.bValid && !chunk.bGenerating)
+			if (!chunk.LevelMask[level] && !chunk.bGenerating)
 			{
+				chunk.DirtyLevels[level] = true;
 				ChunksToUpdate.Emplace(FIntVector2(x,y),key);
 				chunk.bGenerating = true;
 			}
+			else if (!chunk.LevelMask[level] && chunk.bGenerating)
+			{
+				chunk.DirtyLevels[level] = true;
+			}
+			
 			double chunkWorldX = x * ChunkSize;
 			double chunkWorldY = y * ChunkSize;
 
@@ -618,8 +626,9 @@ void AClipmapTerrainActor::ChunksToWindow(int level, double xOffset, double yOff
 			{
 				continue;
 			}
+			chunk.DirtyLevels[level] = true;
 			rowCopySizeY = copySizeY;
-			EmplaceWindowRegion(chunk.Normalmap[level], chunk.Heightmap[level], level, xOffset + windowX, yOffset + windowY, copyStartX, copyStartY, copySizeX, copySizeY);
+			EmplaceWindowRegion(chunk.Heightmap[level], level, xOffset + windowX, yOffset + windowY, copyStartX, copyStartY, copySizeX, copySizeY);
 			windowX += copySizeX;
 		}
 		windowY += rowCopySizeY;
@@ -664,11 +673,15 @@ void AClipmapTerrainActor::Tick(float DeltaTime)
 			FRandomTerrainChunk& chunk = Chunks[chunkInfo.Value.Index];
 
 			chunk.HeightmapBuffers.SetNum(ClipmapLevels);
-			chunk.NormalmapBuffers.SetNum(ClipmapLevels);
+			//chunk.NormalmapBuffers.SetNum(ClipmapLevels);
 			for (int level = 0; level < ClipmapLevels; level++)
 			{
+				if (!chunk.DirtyLevels[level])
+				{
+					continue;
+				}
 				chunk.HeightmapBuffers[level] = (float*)chunk.Heightmap[level]->GetPlatformData()->Mips[0].BulkData.Lock(LOCK_READ_WRITE);
-				chunk.NormalmapBuffers[level] = (FFloat16Color*)chunk.Normalmap[level]->GetPlatformData()->Mips[0].BulkData.Lock(LOCK_READ_WRITE);
+				//chunk.NormalmapBuffers[level] = (FFloat16Color*)chunk.Normalmap[level]->GetPlatformData()->Mips[0].BulkData.Lock(LOCK_READ_WRITE);
 			}
 		}
 		ParallelFor(ChunksToUpdate.Num(), [&](int i)
@@ -679,6 +692,10 @@ void AClipmapTerrainActor::Tick(float DeltaTime)
 				int y = chunkInfo.Key.Y;
 				for (int level = 0; level < ClipmapLevels; level++)
 				{
+					if (!chunk.DirtyLevels[level])
+					{
+						continue;
+					}
 					GenHeightmap(x, y, level, chunk);
 				}
 			});
@@ -688,10 +705,14 @@ void AClipmapTerrainActor::Tick(float DeltaTime)
 			FRandomTerrainChunk& chunk = Chunks[chunkInfo.Value.Index];
 			for (int level = 0; level < ClipmapLevels; level++)
 			{
+				if (!chunk.DirtyLevels[level])
+				{
+					continue;
+				}
 				chunk.Heightmap[level]->GetPlatformData()->Mips[0].BulkData.Unlock();
 				chunk.Heightmap[level]->UpdateResource();
-				chunk.Normalmap[level]->GetPlatformData()->Mips[0].BulkData.Unlock();
-				chunk.Normalmap[level]->UpdateResource();
+				//chunk.Normalmap[level]->GetPlatformData()->Mips[0].BulkData.Unlock();
+				//chunk.Normalmap[level]->UpdateResource();
 				chunk.HeightmapBuffers.Reset();
 			}
 			if (chunk.MinHeight < MinHeight)
@@ -704,6 +725,7 @@ void AClipmapTerrainActor::Tick(float DeltaTime)
 				bBoundsNeedsUpdate = true;
 				MaxHeight = chunk.MaxHeight;
 			}
+			chunk.DirtyLevels.Init(false, ClipmapLevels);
 		}
 		ChunksToUpdate.Reset();
 	}
@@ -724,8 +746,13 @@ void AClipmapTerrainActor::Tick(float DeltaTime)
 					FTextureRHIRef WindowTexture2DRHI = windowTexture->GetResource()->TextureRHI;
 					for (const FUpdateHeightmapRegion& Region : Regions)
 					{
+						if (!Region.SourceTexture->GetResource())
+						{
+							UE_LOG(LogTemp, Log, TEXT("WTF"));
+							continue;
+						}
 						RHICmdList.CopyTexture(Region.SourceTexture->GetResource()->TextureRHI, windowTexture->GetResource()->TextureRHI, Region.Region);
-						RHICmdList.CopyTexture(Region.NormalSourceTexture->GetResource()->TextureRHI, normalWindowTexture->GetResource()->TextureRHI, Region.Region);
+						//RHICmdList.CopyTexture(Region.NormalSourceTexture->GetResource()->TextureRHI, normalWindowTexture->GetResource()->TextureRHI, Region.Region);
 					}
 
 
@@ -776,15 +803,16 @@ FRandomTerrainChunkKey& AClipmapTerrainActor::GetChunk(int x, int y)
 		ret.Index = Chunks.Num();
 		FRandomTerrainChunk& newChunk = Chunks.AddDefaulted_GetRef();
 		newChunk.Heightmap.SetNum(ClipmapLevels);
-		newChunk.Normalmap.SetNum(ClipmapLevels);
+		newChunk.DirtyLevels.Init(false,ClipmapLevels);
+		newChunk.LevelMask.Init(false, ClipmapLevels);
+		//newChunk.Normalmap.SetNum(ClipmapLevels);
 		for (int i = 0; i < ClipmapLevels; i++)
 		{
 			newChunk.Heightmap[i] = UTexture2D::CreateTransient(ChunkSize, ChunkSize, EPixelFormat::PF_R32_FLOAT);
-			newChunk.Normalmap[i] = UTexture2D::CreateTransient(ChunkSize, ChunkSize, EPixelFormat::PF_FloatRGBA);
+			newChunk.Heightmap[i]->UpdateResource();
+			//newChunk.Normalmap[i] = UTexture2D::CreateTransient(ChunkSize, ChunkSize, EPixelFormat::PF_FloatRGBA);
 		}
 		ret.bValid = true;
-		//Marked to regenerate
-		newChunk.bValid = false;
 	}
 	return ret;
 }

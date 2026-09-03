@@ -54,7 +54,7 @@ class CLIPMAPTERRAIN_API AClipmapTerrainActor : public AActor
 	void ChunksToWindow(int level, double xOffset, double yOffset, double x1, double x2, double y1, double y2);
 	void GenHeightmap(int x, int y, int level, FRandomTerrainChunk& chunk);
 	void UpdateClipmapBounds();
-	void EmplaceWindowRegion(UTexture2D* Normalmap,UTexture2D* Heightmap, int level, double destX, double destY, int srcX, int srcY, int sizeX, int sizeY);
+	void EmplaceWindowRegion(UTexture2D* Heightmap, int level, double destX, double destY, int srcX, int srcY, int sizeX, int sizeY);
 	FVector GetNormal(double x, double y,double step);
 	FVector GetNormalUnsafe(int x, int y,float* buffer);
 	FVector GetLocalCameraLocation() const;
@@ -115,7 +115,7 @@ public:
 	int ChunkSize = 64;
 	UPROPERTY(BlueprintReadWrite, EditInstanceOnly, Category = "Generation Settings")
 	int Seed = 1337;
-	UPROPERTY(transient, VisibleAnywhere, BlueprintReadOnly)
+	UPROPERTY(transient)
 	TArray<FRandomTerrainChunk> Chunks;
 	UPROPERTY(BlueprintReadWrite, EditInstanceOnly, Category = "Generation Settings")
 	FString FastNoiseEncodedString = "AwQ=";
