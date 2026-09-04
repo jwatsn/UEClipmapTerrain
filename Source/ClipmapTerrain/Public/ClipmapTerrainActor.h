@@ -78,8 +78,6 @@ public:
 	UPROPERTY(Transient, VisibleAnywhere, BlueprintReadWrite)
 	TObjectPtr<UTexture2DArray> WindowTexture;
 
-	UPROPERTY(Transient, VisibleAnywhere, BlueprintReadWrite)
-	TObjectPtr<UTexture2DArray> NormalWindowTexture;
 
 	UPROPERTY(transient)
 	UMaterialInstanceDynamic* ClipmapMaterial = nullptr;
