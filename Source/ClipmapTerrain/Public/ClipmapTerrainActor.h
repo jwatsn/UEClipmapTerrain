@@ -50,6 +50,7 @@ class CLIPMAPTERRAIN_API AClipmapTerrainActor : public AActor
 	void GenerateMesh();
 	void UpdateClipmap();
 	void UpdateClipmapLevels();
+	void UpdateVisibleChunks();
 	void UpdateWindowTexture();
 	void ChunksToWindow(int level, double xOffset, double yOffset, double x1, double x2, double y1, double y2);
 	void GenHeightmap(int x, int y, int level, FRandomTerrainChunk& chunk);
@@ -86,15 +87,15 @@ public:
 	UPROPERTY(BlueprintReadWrite, EditInstanceOnly)
 	TObjectPtr<UMaterialInterface> Material;
 
-	UPROPERTY(Transient)
+	UPROPERTY(Transient, BlueprintReadWrite, EditInstanceOnly)
 	TObjectPtr<UInstancedStaticMeshComponent> CrossMeshInstance;
-	UPROPERTY(Transient)
+	UPROPERTY(Transient, BlueprintReadWrite, EditInstanceOnly)
 	TObjectPtr<UInstancedStaticMeshComponent> TileMeshInstance;
-	UPROPERTY(Transient)
+	UPROPERTY(Transient, BlueprintReadWrite, EditInstanceOnly)
 	TObjectPtr<UInstancedStaticMeshComponent> FillerMeshInstance;
-	UPROPERTY(Transient)
+	UPROPERTY(Transient, BlueprintReadWrite, EditInstanceOnly)
 	TObjectPtr<UInstancedStaticMeshComponent> TrimMeshInstance;
-	UPROPERTY(Transient)
+	UPROPERTY(Transient, BlueprintReadWrite, EditInstanceOnly)
 	TObjectPtr<UInstancedStaticMeshComponent> SeamMeshInstance;
 
 	bool bClipmapDirty = true;
@@ -119,16 +120,23 @@ public:
 	FString FastNoiseEncodedString = "AwQ=";
 private:
 	bool bBoundsNeedsUpdate = false;
+	bool bVisibilityNeedsUpdate = false;
 
 	double MinHeight = 0;
 	double MaxHeight = 0;
 
+	double ViewDistanceSquared = 6 * 6;
+
 	uint32 CurrentChunkId = 0;
+
+	uint32 ChunkVisibilityIndex = 0;
+	int32 VisChecksPerUpdate = 25;
 
 	
 	UPROPERTY(transient)
 	TMap<FIntVector2, FRandomTerrainChunkKey> ChunkMap;
 	
+	TArray<uint32> FreeChunkPool;
 
 	TArray<TPair<FIntVector2, FRandomTerrainChunkKey>> ChunksToUpdate;
 
@@ -150,7 +158,7 @@ private:
 
 	FVector LastViewGridPosition;
 	FVector ViewGridMovement;
-
+	FVector UVOffset;
 	bool bFirstUpdate = true;
 
 	FastNoise::SmartNode<> NoiseNode;

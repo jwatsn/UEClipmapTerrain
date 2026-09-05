@@ -12,6 +12,17 @@ struct FRandomTerrainChunkKey
 	uint32 Index;
 
 	bool bValid;
+
+	bool operator==(const FRandomTerrainChunkKey& Other) const
+	{
+		return Index == Other.Index && Id == Other.Id;
+	}
+
+	// Friend function to expose GetTypeHash for standard UE containers
+	friend uint32 GetTypeHash(const FRandomTerrainChunkKey& StructInstance)
+	{
+		return HashCombine(GetTypeHash(StructInstance.Id), GetTypeHash(StructInstance.Index));
+	}
 };
 
 USTRUCT(BlueprintType)
@@ -25,6 +36,8 @@ struct FRandomTerrainChunk
 	UPROPERTY(transient)
 	TArray<TObjectPtr<UTexture2D>> Normalmap;
 
+	FIntVector2 Key;
+
 	TBitArray<> DirtyLevels;
 	TBitArray<> LevelMask;
 
@@ -33,6 +46,7 @@ struct FRandomTerrainChunk
 	Chaos::FHeightFieldPtr HeightField;
 
 	bool bGenerating = false;
+	bool bValid = false;
 
 	double MinHeight = 0;
 	double MaxHeight = 0;

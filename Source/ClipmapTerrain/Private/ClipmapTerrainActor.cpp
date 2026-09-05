@@ -62,6 +62,12 @@ AClipmapTerrainActor::AClipmapTerrainActor()
 	TileMeshInstance->SetNumCustomDataFloats(1);
 	CrossMeshInstance->SetNumCustomDataFloats(1);
 
+	SeamMeshInstance->SetAbsolute(true, true, true);
+	TrimMeshInstance->SetAbsolute(true, true, true);
+	FillerMeshInstance->SetAbsolute(true, true, true);
+	TileMeshInstance->SetAbsolute(true, true, true);
+	CrossMeshInstance->SetAbsolute(true, true, true);
+
 	RootComponent = CreateDefaultSubobject<USceneComponent>("Terrain Root");
 
 	SeamMeshInstance->SetupAttachment(RootComponent);
@@ -109,6 +115,8 @@ void AClipmapTerrainActor::InitClipmap()
 	auto encodedCast = StringCast<ANSICHAR>(*FastNoiseEncodedString);
 	NoiseNode = FastNoise::NewFromEncodedNodeTree(encodedCast.Get());
 
+	ChunkVisibilityIndex = 0;
+	CurrentChunkId = 0;
 
 	MinHeight = 0;
 	MaxHeight = 0;
@@ -129,6 +137,8 @@ void AClipmapTerrainActor::InitClipmap()
 	QueuedUpdateRegions.Reset();
 	ChunkMap.Reset();
 	Chunks.Reset();
+	FreeChunkPool.Reset();
+	
 
 	TileMap.SetNum(ClipmapLevels * 16);
 	Fillers.SetNum(ClipmapLevels);
@@ -137,6 +147,11 @@ void AClipmapTerrainActor::InitClipmap()
 
 
 
+	
+	UVOffset = FVector::ZeroVector;
+	int WindowSize = ClipmapTileSize * 4;
+
+	
 	GenerateMesh();
 
 	if (Material)
@@ -150,7 +165,7 @@ void AClipmapTerrainActor::InitClipmap()
 		ClipmapMaterial->SetTextureParameterValue("WindowTexture", WindowTexture);
 		//ClipmapMaterial->SetTextureParameterValue("NormalWindowTexture", NormalWindowTexture);
 		ClipmapMaterial->SetScalarParameterValue("HeightScale", HeightScale * 100.0);
-		ClipmapMaterial->SetScalarParameterValue("WindowSize", ClipmapTileSize * 4);
+		ClipmapMaterial->SetScalarParameterValue("WindowSize", WindowSize);
 		ClipmapMaterial->SetScalarParameterValue("NumLevels", ClipmapLevels);
 		CrossMeshInstance->SetMaterial(0, ClipmapMaterial);
 		TileMeshInstance->SetMaterial(0, ClipmapMaterial);
@@ -182,11 +197,13 @@ void AClipmapTerrainActor::UpdateClipmap()
 	const int CLIPMAP_RESOLUTION = TILE_RESOLUTION * 4 + 1;
 	const int CLIPMAP_VERT_RESOLUTION = CLIPMAP_RESOLUTION + 1;
 	const int NUM_CLIPMAP_LEVELS = ClipmapLevels;
+	const int WINDOW_SIZE = ClipmapTileSize * 4;
+
 
 	FVector ViewPosition = GetLocalCameraLocation();
 
-	FVector ViewGridPosition = FVector(FMath::Floor(ViewPosition.X / 100.0 / ClipmapTileSize), FMath::Floor(ViewPosition.Y / 100.0 / ClipmapTileSize), FMath::Floor(ViewPosition.Z / 100.0 / ClipmapTileSize)) * ClipmapTileSize * 100.0;
-	//ViewGridPosition += FVector(ClipmapTileSize * 50, ClipmapTileSize * 50, 0);
+	FVector ViewGridPosition = ViewPosition.GridSnap(ClipmapTileSize * 100.0);
+
 	if (!bFirstUpdate && ViewGridPosition == LastViewGridPosition)
 	{
 		return;
@@ -197,12 +214,16 @@ void AClipmapTerrainActor::UpdateClipmap()
 	}
 	if (!bFirstUpdate)
 	{
-		ViewGridMovement = ViewGridPosition - LastViewGridPosition;
+		ViewGridMovement = (ViewGridPosition - LastViewGridPosition)/100.0f;
+	}
+	else
+	{
+		ViewGridMovement = FVector(WINDOW_SIZE, WINDOW_SIZE, 0);
 	}
 	LastViewGridPosition = ViewGridPosition;
+	SetActorLocation(ViewGridPosition);
 	
-	bFirstUpdate = false;
-	UpdateClipmapLevels();
+	
 	FVector SnappedPos = FVector(FMath::Floor(ViewGridPosition.X / 100.0), FMath::Floor(ViewGridPosition.Y / 100.0), 0) * 100.0;
 	if(!CrossInstanceID.IsValid())
 	{
@@ -213,14 +234,17 @@ void AClipmapTerrainActor::UpdateClipmap()
 	{
 		CrossMeshInstance->UpdateInstanceTransformById(CrossInstanceID.Id, FTransform(FRotator::ZeroRotator, SnappedPos), true, true);
 	}
+	
 	for (int level = 0; level < ClipmapLevels; level++)
 	{
-		int scale = 1 << level;
+		double scale = FMath::Pow(2.0,level);
 		SnappedPos = FVector(FMath::Floor(ViewGridPosition.X / scale / 100.0), FMath::Floor(ViewGridPosition.Y / scale / 100.0), 0) * scale * 100.0;
+		
 		
 		const FVector tileSize = FVector(TILE_RESOLUTION * scale, TILE_RESOLUTION * scale, 0) * 100.0;
 
 		const FVector base = FVector(SnappedPos.X, SnappedPos.Y, 0) - tileSize * 2;
+		
 		for (int y = 0; y < 4; y++)
 		{
 			for (int x = 0; x < 4; x++)
@@ -291,6 +315,7 @@ void AClipmapTerrainActor::UpdateClipmap()
 				trimIdEntry = FClipmapMeshPiece(TrimMeshInstance->AddInstanceById(FTransform(FRotator(0.0f, -Rotations[r], 0.0f), tile_centre, FVector(scale, scale, 1.0f)), true), tile_centre);
 				TrimMeshInstance->SetCustomDataValueById(trimIdEntry.Id, 0, level);
 			}
+			
 			FClipmapMeshPiece& seamIdEntry = Seams[level];
 			if (seamIdEntry.IsValid())
 			{
@@ -305,8 +330,19 @@ void AClipmapTerrainActor::UpdateClipmap()
 				seamIdEntry = FClipmapMeshPiece(SeamMeshInstance->AddInstanceById(FTransform(FRotator::ZeroRotator, next_base, FVector(scale, scale, 1.0f)), true), next_base);
 				SeamMeshInstance->SetCustomDataValueById(seamIdEntry.Id, 0, level);
 			}
+			
 		}
 	}
+
+	UpdateClipmapLevels();
+
+	
+	if (ClipmapMaterial)
+	{
+		ClipmapMaterial->SetVectorParameterValue("UVOffset", UVOffset/WINDOW_SIZE);
+	}
+
+	bFirstUpdate = false;
 }
 void GetSingleNormal(float L, float R, float U, float D,FVector& outNormal)
 {
@@ -344,12 +380,11 @@ void AClipmapTerrainActor::GenHeightmap(int x, int y, int level, FRandomTerrainC
 	double scalar = FMath::Pow(2.0, level);
 
 	float* pixels = chunk.HeightmapBuffers[level];
-	//FFloat16Color* normals = chunk.NormalmapBuffers[level];
+
 	double startX = (x) * ChunkSize * scalar;
 	double startY = (y) * ChunkSize * scalar;
 
-	// Offset outward by half the footprint at this level, so the
-	// sampled region stays centered on the same point at every level
+
 
 
 	NoiseNode->GenUniformGrid2D(pixels, startX, startY, ChunkSize, ChunkSize, scalar, scalar, Seed);
@@ -376,7 +411,8 @@ void AClipmapTerrainActor::GenHeightmap(int x, int y, int level, FRandomTerrainC
 }
 void AClipmapTerrainActor::UpdateClipmapBounds()
 {
-	FVector boundsExtension = FVector(0, 0, MaxHeight * HeightScale * 100.0);
+	FVector boundsExtension = FVector(0, 0, MaxHeight * HeightScale * 200.0);
+
 	FVector negBoundsExtension = MinHeight < 0 ? FVector(0, 0, -MinHeight * HeightScale * 100.0) : FVector::ZeroVector;
 	CrossMeshSection->SetPositiveBoundsExtension(boundsExtension);
 	TileMeshSection->SetPositiveBoundsExtension(boundsExtension);
@@ -384,17 +420,23 @@ void AClipmapTerrainActor::UpdateClipmapBounds()
 	TrimMeshSection->SetPositiveBoundsExtension(boundsExtension);
 	SeamMeshSection->SetPositiveBoundsExtension(boundsExtension);
 
-	CrossMeshSection->SetNegativeBoundsExtension(negBoundsExtension);
+	/*CrossMeshSection->SetNegativeBoundsExtension(negBoundsExtension);
 	TileMeshSection->SetNegativeBoundsExtension(negBoundsExtension);
 	FillerMeshSection->SetNegativeBoundsExtension(negBoundsExtension);
 	TrimMeshSection->SetNegativeBoundsExtension(negBoundsExtension);
-	SeamMeshSection->SetNegativeBoundsExtension(negBoundsExtension);
+	SeamMeshSection->SetNegativeBoundsExtension(negBoundsExtension);*/
 
 	CrossMeshSection->CalculateExtendedBounds();
 	TileMeshSection->CalculateExtendedBounds();
 	FillerMeshSection->CalculateExtendedBounds();
 	TrimMeshSection->CalculateExtendedBounds();
 	SeamMeshSection->CalculateExtendedBounds();
+
+	CrossMeshInstance->UpdateBounds();
+	TileMeshInstance->UpdateBounds();
+	FillerMeshInstance->UpdateBounds();
+	TrimMeshInstance->UpdateBounds();
+	SeamMeshInstance->UpdateBounds();
 }
 void AClipmapTerrainActor::EmplaceWindowRegion(UTexture2D* Heightmap, int level,double destX, double destY, int srcX, int srcY, int sizeX, int sizeY)
 {
@@ -503,18 +545,276 @@ void AClipmapTerrainActor::UpdateClipmapLevels()
 {
 	int windowSize = ClipmapTileSize * 4;
 	int windowSizeHalf = windowSize / 2;
-
 	
+	const FVector& unscaledDiff = ViewGridMovement;
 
+	bool bReset = false;
 	for (int i = 0; i < ClipmapLevels; i++)
 	{
+		
 		double scalar = FMath::Pow(2.0, i);
 		FVector2D pos = FVector2D(LastViewGridPosition.X, LastViewGridPosition.Y) / 100.0 / scalar;
+		
+		if (unscaledDiff.IsNearlyZero())
+		{
+			continue;
+		}
+		if (FMath::Abs(unscaledDiff.X) < windowSize && FMath::Abs(unscaledDiff.Y) < windowSize)
+		{
+			
+			FVector diff = unscaledDiff / scalar;
+			
+
+			bool ret = false;
+			if (diff.X > 0)
+			{
+
+				double yOffset = UVOffset.Y/scalar + diff.Y;
+				double xOffset = UVOffset.X/scalar;
+
+
+				int xOffsetInt = FMath::FloorToInt(xOffset / windowSize);
+				double xOffsetWrapped = xOffset - xOffsetInt * windowSize;
+
+				int yOffsetInt = FMath::FloorToInt(yOffset / windowSize);
+				double yOffsetWrapped = yOffset - yOffsetInt * windowSize;
+
+				if (yOffsetWrapped != 0)
+				{
+					{
+						double x1 = pos.X + windowSizeHalf - diff.X;
+						double x2 = pos.X + windowSizeHalf;
+						double y1 = pos.Y - windowSizeHalf;
+						double y2 = pos.Y + windowSizeHalf - yOffsetWrapped;
+						ChunksToWindow(i, xOffsetWrapped, yOffsetWrapped, x1, x2, y1, y2);
+					}
+					{
+						double x1 = pos.X + windowSizeHalf - diff.X;
+						double x2 = pos.X + windowSizeHalf;
+						double y1 = pos.Y + windowSizeHalf - yOffsetWrapped;
+						double y2 = pos.Y + windowSizeHalf;
+						ChunksToWindow(i, xOffsetWrapped, 0, x1, x2, y1, y2);
+					}
+				}
+				else
+				{
+					double x1 = pos.X + windowSizeHalf - diff.X;
+					double x2 = pos.X + windowSizeHalf;
+					double y1 = pos.Y - windowSizeHalf;
+					double y2 = pos.Y + windowSizeHalf;
+
+
+
+					ChunksToWindow(i, xOffsetWrapped, 0, x1, x2, y1, y2);
+
+				}
+				
+
+				ret = true;
+			}
+			else if (diff.X < 0)
+			{
+				double yOffset = UVOffset.Y/scalar + diff.Y;
+				double xOffset = UVOffset.X/scalar + diff.X;
+				
+				int xOffsetInt = FMath::FloorToInt(xOffset / windowSize);
+				double xOffsetWrapped = xOffset - xOffsetInt * windowSize;
+
+				int yOffsetInt = FMath::FloorToInt(yOffset / windowSize);
+				double yOffsetWrapped = yOffset - yOffsetInt * windowSize;
+				if (yOffsetWrapped != 0)
+				{
+					{
+						double x1 = pos.X - windowSizeHalf;
+						double x2 = pos.X - windowSizeHalf - diff.X;
+						double y1 = pos.Y - windowSizeHalf;
+						double y2 = pos.Y + windowSizeHalf - yOffsetWrapped;
+						ChunksToWindow(i, xOffsetWrapped, yOffsetWrapped, x1, x2, y1, y2);
+					}
+					{
+						double x1 = pos.X - windowSizeHalf;
+						double x2 = pos.X - windowSizeHalf - diff.X;
+						double y1 = pos.Y + windowSizeHalf - yOffsetWrapped;
+						double y2 = pos.Y + windowSizeHalf;
+						ChunksToWindow(i, xOffsetWrapped, 0, x1, x2, y1, y2);
+					}
+				}
+				else
+				{
+
+					double x1 = pos.X - windowSizeHalf;
+					double x2 = pos.X - windowSizeHalf - diff.X;
+					double y1 = pos.Y - windowSizeHalf;
+					double y2 = pos.Y + windowSizeHalf;
+
+
+					ChunksToWindow(i, xOffsetWrapped, 0, x1, x2, y1, y2);
+				}
+
+				ret = true;
+			}
+			
+			if (diff.Y > 0)
+			{
+
+				double yOffset = UVOffset.Y/scalar;
+				double xOffset = UVOffset.X/scalar + diff.X;
+
+				int xOffsetInt = FMath::FloorToInt(xOffset / windowSize);
+				double xOffsetWrapped = xOffset - xOffsetInt * windowSize;
+
+				int yOffsetInt = FMath::FloorToInt(yOffset / windowSize);
+				double yOffsetWrapped = yOffset - yOffsetInt * windowSize;
+
+
+				if (xOffsetWrapped != 0)
+				{
+
+					{
+						double x1 = pos.X - windowSizeHalf;
+						double x2 = pos.X + windowSizeHalf - xOffsetWrapped;
+						double y1 = pos.Y + windowSizeHalf - diff.Y;
+						double y2 = pos.Y + windowSizeHalf;
+						ChunksToWindow(i, xOffsetWrapped, yOffsetWrapped, x1, x2, y1, y2);
+					}
+
+					{
+						double x1 = pos.X + windowSizeHalf - xOffsetWrapped;
+						double x2 = pos.X + windowSizeHalf;
+						double y1 = pos.Y + windowSizeHalf - diff.Y;
+						double y2 = pos.Y + windowSizeHalf;
+						ChunksToWindow(i, 0, yOffsetWrapped, x1, x2, y1, y2);
+
+					}
+				}
+				else
+				{
+					double x1 = pos.X - windowSizeHalf;
+					double x2 = pos.X + windowSizeHalf;
+					double y1 = pos.Y + windowSizeHalf - diff.Y;
+					double y2 = pos.Y + windowSizeHalf;
+
+					ChunksToWindow(i, 0, yOffsetWrapped, x1, x2, y1, y2);
+
+
+				}
+				ret = true;
+				
+			}
+			else if (diff.Y < 0)
+			{
+
+
+				
+				double yOffset = UVOffset.Y/scalar + diff.Y;
+				double xOffset = UVOffset.X/scalar + diff.X;
+
+				int xOffsetInt = FMath::FloorToInt(xOffset / windowSize);
+				double xOffsetWrapped = xOffset - xOffsetInt * windowSize;
+
+				int yOffsetInt = FMath::FloorToInt(yOffset / windowSize);
+				double yOffsetWrapped = yOffset - yOffsetInt * windowSize;
+
+				if (xOffsetWrapped != 0)
+				{
+
+					{
+						double x1 = pos.X - windowSizeHalf;
+						double x2 = pos.X + windowSizeHalf - xOffsetWrapped;
+						double y1 = pos.Y - windowSizeHalf;
+						double y2 = pos.Y - windowSizeHalf - diff.Y;
+						ChunksToWindow(i, xOffsetWrapped, yOffsetWrapped, x1, x2, y1, y2);
+					}
+
+					{
+						double x1 = pos.X + windowSizeHalf - xOffsetWrapped;
+						double x2 = pos.X + windowSizeHalf;
+						double y1 = pos.Y - windowSizeHalf;
+						double y2 = pos.Y - windowSizeHalf - diff.Y;
+						ChunksToWindow(i, 0, yOffsetWrapped, x1, x2, y1, y2);
+
+					}
+				}
+				else
+				{
+					double x1 = pos.X - windowSizeHalf;
+					double x2 = pos.X + windowSizeHalf;
+					double y1 = pos.Y - windowSizeHalf;
+					double y2 = pos.Y - windowSizeHalf - diff.Y;
+
+					ChunksToWindow(i, 0, yOffsetWrapped, x1, x2, y1, y2);
+
+
+				}
+				ret = true;
+				
+			}
+			if (ret)
+				continue;
+		}
+		if (i == 0)
+		{
+			UVOffset.X = 0;
+			UVOffset.Y = 0;
+			bReset = true;
+		}
 		double x1 = pos.X - windowSizeHalf;
 		double x2 = pos.X + windowSizeHalf;
 		double y1 = pos.Y - windowSizeHalf;
 		double y2 = pos.Y + windowSizeHalf;
 		ChunksToWindow(i, 0, 0, x1, x2, y1, y2);
+	}
+	if (!bReset)
+	{
+		UVOffset += unscaledDiff;
+	}
+}
+void AClipmapTerrainActor::UpdateVisibleChunks()
+{
+	uint32 numChunks = Chunks.Num();
+	if (numChunks == 0)
+	{
+		return;
+	}
+	
+	int loops = (loops = numChunks) > VisChecksPerUpdate ? VisChecksPerUpdate : loops;
+	FVector2D pos = FVector2D(FMath::Floor(LastViewGridPosition.X / 100.0 / ChunkSize), FMath::Floor(LastViewGridPosition.Y / 100.0 / ChunkSize));
+
+	for (int i = 0; i < loops; i++)
+	{
+		
+		FRandomTerrainChunk& chunk = Chunks[ChunkVisibilityIndex];
+		uint32 prevIndex = ChunkVisibilityIndex;
+		ChunkVisibilityIndex = (ChunkVisibilityIndex += 1) < numChunks ? ChunkVisibilityIndex : 0;
+		if (!chunk.bValid)
+		{
+			continue;
+		}
+		
+		bool removeChunk = true;
+		for (int l = 0; l < ClipmapLevels; l++)
+		{
+			if (!chunk.LevelMask[l])
+			{
+				
+				continue;
+			}
+			double scalar = FMath::Pow(2.0, l);
+			FVector2D scaledPos = pos / scalar;
+			FVector2D diff = FVector2D(chunk.Key) - scaledPos;
+			if (diff.SquaredLength() <= ViewDistanceSquared)
+			{
+				removeChunk = false;
+				break;
+			}
+		}
+		if (removeChunk)
+		{
+			FreeChunkPool.Add(prevIndex);
+			ChunkMap.Remove(chunk.Key);
+			chunk.bValid = false;
+		}
+		
 	}
 }
 void AClipmapTerrainActor::Tick(float DeltaTime)
@@ -613,7 +913,6 @@ void AClipmapTerrainActor::Tick(float DeltaTime)
 					{
 						if (!Region.SourceTexture->GetResource())
 						{
-							UE_LOG(LogTemp, Log, TEXT("WTF"));
 							continue;
 						}
 						RHICmdList.CopyTexture(Region.SourceTexture->GetResource()->TextureRHI, windowTexture->GetResource()->TextureRHI, Region.Region);
@@ -626,6 +925,8 @@ void AClipmapTerrainActor::Tick(float DeltaTime)
 				});
 
 	}
+
+	UpdateVisibleChunks();
 }
 
 FVector AClipmapTerrainActor::GetLocalCameraLocation() const
@@ -665,18 +966,33 @@ FRandomTerrainChunkKey& AClipmapTerrainActor::GetChunk(int x, int y)
 	{
 		ret.Id = CurrentChunkId;
 		CurrentChunkId++;
-		ret.Index = Chunks.Num();
-		FRandomTerrainChunk& newChunk = Chunks.AddDefaulted_GetRef();
+		bool usePoolId = !FreeChunkPool.IsEmpty();
+		if (usePoolId)
+		{
+			ret.Index = FreeChunkPool.Pop();
+		}
+		else
+		{
+			ret.Index = Chunks.Num();
+		}
+		FRandomTerrainChunk& newChunk = usePoolId ? Chunks[ret.Index] : Chunks.AddDefaulted_GetRef();
+		newChunk.bValid = true;
+		newChunk.bGenerating = false;
 		newChunk.Heightmap.SetNum(ClipmapLevels);
+		newChunk.Key.X = x;
+		newChunk.Key.Y = y;
 		newChunk.DirtyLevels.Init(false,ClipmapLevels);
 		newChunk.LevelMask.Init(false, ClipmapLevels);
-		//newChunk.Normalmap.SetNum(ClipmapLevels);
+
 		for (int i = 0; i < ClipmapLevels; i++)
 		{
-			newChunk.Heightmap[i] = UTexture2D::CreateTransient(ChunkSize, ChunkSize, EPixelFormat::PF_R32_FLOAT);
-			newChunk.Heightmap[i]->UpdateResource();
-			//newChunk.Normalmap[i] = UTexture2D::CreateTransient(ChunkSize, ChunkSize, EPixelFormat::PF_FloatRGBA);
+			if (!newChunk.Heightmap[i])
+			{
+				newChunk.Heightmap[i] = UTexture2D::CreateTransient(ChunkSize, ChunkSize, EPixelFormat::PF_R32_FLOAT);
+				newChunk.Heightmap[i]->UpdateResource();
+			}
 		}
+		
 		ret.bValid = true;
 	}
 	return ret;
