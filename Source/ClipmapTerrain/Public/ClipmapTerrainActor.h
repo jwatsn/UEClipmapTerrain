@@ -14,6 +14,13 @@ class CLIPMAPTERRAIN_API AClipmapTerrainActor : public AActor
 {
 	GENERATED_BODY()
 
+	struct FClipmapCollisionChunk
+	{
+		bool bHasTargets = false;
+		int NumTargets = 0;
+		class UClipmapCollisionComponent* Component = nullptr;
+	};
+
 	struct FClipmapMeshPiece
 	{
 		FPrimitiveInstanceId Id;
@@ -48,6 +55,7 @@ class CLIPMAPTERRAIN_API AClipmapTerrainActor : public AActor
 
 	void InitClipmap();
 	void GenerateMesh();
+	void UpdateTargetActors();
 	void UpdateClipmap();
 	void UpdateClipmapLevels();
 	void UpdateVisibleChunks();
@@ -56,6 +64,8 @@ class CLIPMAPTERRAIN_API AClipmapTerrainActor : public AActor
 	void GenHeightmap(int x, int y, int level, FRandomTerrainChunk& chunk);
 	void UpdateClipmapBounds();
 	void EmplaceWindowRegion(UTexture2D* Heightmap, int level, double destX, double destY, int srcX, int srcY, int sizeX, int sizeY);
+	void CreateCollisionComponent(const FIntVector2& key, FClipmapCollisionChunk& collisionChunk);
+	Chaos::FHeightFieldPtr CreateCollisionChunk(const FIntVector2& key, TArray<uint8>* MaterialIds);
 	FVector GetNormal(double x, double y,double step);
 	FVector GetNormalUnsafe(int x, int y,float* buffer);
 	FVector GetLocalCameraLocation() const;
@@ -132,6 +142,7 @@ private:
 	uint32 ChunkVisibilityIndex = 0;
 	int32 VisChecksPerUpdate = 25;
 
+	TMap<FIntVector2, FClipmapCollisionChunk> CollisionChunkMap;
 	
 	UPROPERTY(transient)
 	TMap<FIntVector2, FRandomTerrainChunkKey> ChunkMap;
@@ -139,7 +150,7 @@ private:
 	TArray<uint32> FreeChunkPool;
 
 	TArray<TPair<FIntVector2, FRandomTerrainChunkKey>> ChunksToUpdate;
-
+	TArray<FIntVector2> CollisionChunksToAdd;
 	TArray<FUpdateHeightmapRegion> QueuedUpdateRegions;
 	//Static mesh instance ID's
 	FClipmapMeshPiece CrossInstanceID;

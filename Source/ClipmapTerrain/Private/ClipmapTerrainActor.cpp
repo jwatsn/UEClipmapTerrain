@@ -1,5 +1,7 @@
 #include "ClipmapTerrainActor.h"
 #include "ClipmapMeshHelper.h"
+#include "ClipmapCollisionComponent.h"
+#include "ClipmapCollisionSubsystem.h"
 #include "Engine/Texture2DArray.h"
 
 #if WITH_EDITOR
@@ -149,7 +151,7 @@ void AClipmapTerrainActor::InitClipmap()
 
 	
 	UVOffset = FVector::ZeroVector;
-	int WindowSize = ClipmapTileSize * 4;
+	int WindowSize = (ClipmapTileSize+1) * 4;
 
 	
 	GenerateMesh();
@@ -178,7 +180,7 @@ void AClipmapTerrainActor::InitClipmap()
 }
 void AClipmapTerrainActor::UpdateWindowTexture()
 {
-	int32 WindowSize = ClipmapTileSize * 4;
+	int32 WindowSize = (ClipmapTileSize+1) * 4;
 	WindowTexture = UTexture2DArray::CreateTransient(WindowSize, WindowSize, ClipmapLevels, PF_R32_FLOAT);
 	WindowTexture->SRGB = false;
 	WindowTexture->CompressionSettings = TextureCompressionSettings::TC_SingleFloat;
@@ -197,13 +199,13 @@ void AClipmapTerrainActor::UpdateClipmap()
 	const int CLIPMAP_RESOLUTION = TILE_RESOLUTION * 4 + 1;
 	const int CLIPMAP_VERT_RESOLUTION = CLIPMAP_RESOLUTION + 1;
 	const int NUM_CLIPMAP_LEVELS = ClipmapLevels;
-	const int WINDOW_SIZE = ClipmapTileSize * 4;
+	const int WINDOW_SIZE = (ClipmapTileSize+1) * 4;
 
 
 	FVector ViewPosition = GetLocalCameraLocation();
 
 	FVector ViewGridPosition = ViewPosition.GridSnap(ClipmapTileSize * 100.0);
-
+	ViewGridPosition.Z = 0;
 	if (!bFirstUpdate && ViewGridPosition == LastViewGridPosition)
 	{
 		return;
@@ -351,8 +353,7 @@ void GetSingleNormal(float L, float R, float U, float D,FVector& outNormal)
 	float dzdx = (R - L) / 2.0f;
 	float dzdy = (D - U) / 2.0f;
 
-	// 3. Construct the Normal
-	// In Unreal (Z is up), the normal is (-dz/dx, -dz/dy, 1.0)
+
 	outNormal += FVector(-dzdx, -dzdy, 1.0f).GetSafeNormal();
 
 }
@@ -393,25 +394,24 @@ void AClipmapTerrainActor::GenHeightmap(int x, int y, int level, FRandomTerrainC
 	
 	chunk.bGenerating = false;
 	chunk.LevelMask[level] = true;
-	if (level == 0)
+	
+	for (int i = 0; i < ChunkSize * ChunkSize; i++)
 	{
-		for (int i = 0; i < ChunkSize * ChunkSize; i++)
+		const float h = pixels[i];
+		if (h < chunk.MinHeight)
 		{
-			const float h = pixels[i];
-			if (h < chunk.MinHeight)
-			{
-				chunk.MinHeight = h;
-			}
-			if (h > chunk.MaxHeight)
-			{
-				chunk.MaxHeight = h;
-			}
+			chunk.MinHeight = h;
+		}
+		if (h > chunk.MaxHeight)
+		{
+			chunk.MaxHeight = h;
 		}
 	}
+	
 }
 void AClipmapTerrainActor::UpdateClipmapBounds()
 {
-	FVector boundsExtension = FVector(0, 0, MaxHeight * HeightScale * 200.0);
+	FVector boundsExtension = FVector(0, 0, MaxHeight * HeightScale * 100.0);
 
 	FVector negBoundsExtension = MinHeight < 0 ? FVector(0, 0, -MinHeight * HeightScale * 100.0) : FVector::ZeroVector;
 	CrossMeshSection->SetPositiveBoundsExtension(boundsExtension);
@@ -420,11 +420,11 @@ void AClipmapTerrainActor::UpdateClipmapBounds()
 	TrimMeshSection->SetPositiveBoundsExtension(boundsExtension);
 	SeamMeshSection->SetPositiveBoundsExtension(boundsExtension);
 
-	/*CrossMeshSection->SetNegativeBoundsExtension(negBoundsExtension);
+	CrossMeshSection->SetNegativeBoundsExtension(negBoundsExtension);
 	TileMeshSection->SetNegativeBoundsExtension(negBoundsExtension);
 	FillerMeshSection->SetNegativeBoundsExtension(negBoundsExtension);
 	TrimMeshSection->SetNegativeBoundsExtension(negBoundsExtension);
-	SeamMeshSection->SetNegativeBoundsExtension(negBoundsExtension);*/
+	SeamMeshSection->SetNegativeBoundsExtension(negBoundsExtension);
 
 	CrossMeshSection->CalculateExtendedBounds();
 	TileMeshSection->CalculateExtendedBounds();
@@ -452,7 +452,7 @@ void AClipmapTerrainActor::EmplaceWindowRegion(UTexture2D* Heightmap, int level,
 		int dest; int src; int size;
 	};
 
-	auto BuildSegments = [this,WindowSize=ClipmapTileSize*4](double dest, int src, int size) -> TArray<FSegment>
+	auto BuildSegments = [this,WindowSize=(ClipmapTileSize+1)*4](double dest, int src, int size) -> TArray<FSegment>
 		{
 			TArray<FSegment> segs;
 			double d = dest;
@@ -543,7 +543,7 @@ void AClipmapTerrainActor::ChunksToWindow(int level, double xOffset, double yOff
 }
 void AClipmapTerrainActor::UpdateClipmapLevels()
 {
-	int windowSize = ClipmapTileSize * 4;
+	int windowSize = (ClipmapTileSize+1) * 4;
 	int windowSizeHalf = windowSize / 2;
 	
 	const FVector& unscaledDiff = ViewGridMovement;
@@ -566,6 +566,7 @@ void AClipmapTerrainActor::UpdateClipmapLevels()
 			
 
 			bool ret = false;
+			//Calculating the toroidal update per direction.. there might be a better way to do this
 			if (diff.X > 0)
 			{
 
@@ -813,6 +814,7 @@ void AClipmapTerrainActor::UpdateVisibleChunks()
 			FreeChunkPool.Add(prevIndex);
 			ChunkMap.Remove(chunk.Key);
 			chunk.bValid = false;
+			chunk.HeightField = nullptr;
 		}
 		
 	}
@@ -828,6 +830,7 @@ void AClipmapTerrainActor::Tick(float DeltaTime)
 	}
 
 	UpdateClipmap();
+	UpdateTargetActors();
 
 	if (!ChunksToUpdate.IsEmpty())
 	{
@@ -884,17 +887,28 @@ void AClipmapTerrainActor::Tick(float DeltaTime)
 			{
 				bBoundsNeedsUpdate = true;
 				MinHeight = chunk.MinHeight;
+				UE_LOG(LogTemp, Log, TEXT("MIN HEIGHT %f"), MinHeight);
 			}
 			if (chunk.MaxHeight > MaxHeight)
 			{
 				bBoundsNeedsUpdate = true;
 				MaxHeight = chunk.MaxHeight;
+				UE_LOG(LogTemp, Log, TEXT("MAX HEIGHT %f"), MaxHeight);
 			}
 			chunk.DirtyLevels.Init(false, ClipmapLevels);
 		}
 		ChunksToUpdate.Reset();
 	}
 
+	if (!CollisionChunksToAdd.IsEmpty())
+	{
+		for (const FIntVector2& key : CollisionChunksToAdd)
+		{
+
+			CreateCollisionComponent(key, CollisionChunkMap.FindOrAdd(key));
+		}
+		CollisionChunksToAdd.Reset();
+	}
 	if (bBoundsNeedsUpdate)
 	{
 		bBoundsNeedsUpdate = false;
@@ -929,6 +943,226 @@ void AClipmapTerrainActor::Tick(float DeltaTime)
 	UpdateVisibleChunks();
 }
 
+void AClipmapTerrainActor::UpdateTargetActors()
+{
+	UWorld* world = GetWorld();
+
+	if (!world)
+	{
+		return;
+	}
+	UClipmapCollisionSubsystem* collisionSubsystem = world->GetSubsystem<UClipmapCollisionSubsystem>();
+	if (!collisionSubsystem)
+	{
+		return;
+	}
+	for (const auto& It : CollisionChunkMap)
+	{
+		CollisionChunkMap[It.Key].bHasTargets = false;
+	}
+	const double chunkScale = (ChunkSize * 100.0);
+	TArray<FIntVector2> toRemove;
+
+
+	for (UActorComponent* targetComponent : collisionSubsystem->TerrainTargetComponents)
+	{
+		AActor* owner = targetComponent->GetOwner();
+		if (!owner)
+		{
+			continue;
+		}
+		const FVector pos = owner->GetActorLocation();
+		const int cX = FMath::FloorToInt(pos.X / chunkScale);
+		const int cY = FMath::FloorToInt(pos.Y / chunkScale);
+		const FIntVector2 chunk1(cX - 1, cY - 1);
+		const FIntVector2 chunk2(cX, cY - 1);
+		const FIntVector2 chunk3(cX + 1, cY - 1);
+		const FIntVector2 chunk4(cX - 1, cY);
+		const FIntVector2 chunk5(cX, cY);
+		const FIntVector2 chunk6(cX + 1, cY);
+		const FIntVector2 chunk7(cX - 1, cY + 1);
+		const FIntVector2 chunk8(cX, cY + 1);
+		const FIntVector2 chunk9(cX + 1, cY + 1);
+		if (FClipmapCollisionChunk* results = CollisionChunkMap.Find(chunk1))
+		{
+			results->bHasTargets = true;
+		}
+		else
+		{
+			CollisionChunksToAdd.Add(chunk1);
+			
+
+		}
+		if (FClipmapCollisionChunk* results = CollisionChunkMap.Find(chunk2))
+		{
+			results->bHasTargets = true;
+		}
+		else
+		{
+			CollisionChunksToAdd.Add(chunk2);
+		}
+		if (FClipmapCollisionChunk* results = CollisionChunkMap.Find(chunk3))
+		{
+			results->bHasTargets = true;
+		}
+		else
+		{
+			CollisionChunksToAdd.Add(chunk3);
+		}
+		if (FClipmapCollisionChunk* results = CollisionChunkMap.Find(chunk4))
+		{
+			results->bHasTargets = true;
+		}
+		else
+		{
+			CollisionChunksToAdd.Add(chunk4);
+		}
+		if (FClipmapCollisionChunk* results = CollisionChunkMap.Find(chunk5))
+		{
+			results->bHasTargets = true;
+		}
+		else
+		{
+			CollisionChunksToAdd.Add(chunk5);
+		}
+		if (FClipmapCollisionChunk* results = CollisionChunkMap.Find(chunk6))
+		{
+			results->bHasTargets = true;
+		}
+		else
+		{
+			CollisionChunksToAdd.Add(chunk6);
+		}
+		if (FClipmapCollisionChunk* results = CollisionChunkMap.Find(chunk7))
+		{
+			results->bHasTargets = true;
+		}
+		else
+		{
+			CollisionChunksToAdd.Add(chunk7);
+		}
+		if (FClipmapCollisionChunk* results = CollisionChunkMap.Find(chunk8))
+		{
+			results->bHasTargets = true;
+		}
+		else
+		{
+			CollisionChunksToAdd.Add(chunk8);
+		}
+		if (FClipmapCollisionChunk* results = CollisionChunkMap.Find(chunk9))
+		{
+			results->bHasTargets = true;
+		}
+		else
+		{
+			CollisionChunksToAdd.Add(chunk9);
+		}
+	}
+	for (const auto& It : CollisionChunkMap)
+	{
+		if (!It.Value.bHasTargets)
+		{
+			toRemove.Add(It.Key);
+			if (UClipmapCollisionComponent* collisionComponent = It.Value.Component)
+			{
+				collisionComponent->DestroyComponent();
+			}
+		}
+	}
+	for (const FIntVector2& remove : toRemove)
+	{
+		CollisionChunkMap.Remove(remove);
+	}
+
+	for (const FIntVector2& toAddKey : CollisionChunksToAdd)
+	{
+		FRandomTerrainChunkKey chunkKey = GetChunk(toAddKey.X, toAddKey.Y);
+		auto& chunk = Chunks[chunkKey.Index];
+		if (!chunk.LevelMask[0] && !chunk.bGenerating)
+		{
+			chunk.DirtyLevels[0] = true;
+			ChunksToUpdate.Emplace(toAddKey, chunkKey);
+			chunk.bGenerating = true;
+		}
+		else if (chunk.bGenerating)
+		{
+			chunk.DirtyLevels[0] = true;
+		}
+	}
+	
+}
+void AClipmapTerrainActor::CreateCollisionComponent(const FIntVector2& key, FClipmapCollisionChunk& collisionChunk)
+{
+	const FVector offset = FVector(50, 50, 0);
+	Chaos::FHeightFieldPtr heightfield = CreateCollisionChunk(key, nullptr);
+	FVector pos = FVector(key.X * ChunkSize * 100, key.Y * ChunkSize * 100, 0)+offset;
+
+	collisionChunk.bHasTargets = true;
+	if (collisionChunk.Component)
+	{
+		collisionChunk.Component->DestroyComponent();
+	}
+	FActorSpawnParameters params;
+	params.bDeferConstruction = true;
+
+	UClipmapCollisionComponent* newComponent = collisionChunk.Component = NewObject<UClipmapCollisionComponent>(this);
+	newComponent->SetCastShadow(false);
+	newComponent->SetCanEverAffectNavigation(true);
+	newComponent->bNavigationRelevant = true;
+	newComponent->bHasCustomNavigableGeometry = EHasCustomNavigableGeometry::Yes;
+	newComponent->SetCollisionProfileName("Terrain");
+	newComponent->SetupAttachment(RootComponent);
+	newComponent->HeightfieldGeometry = heightfield;
+	newComponent->SetAbsolute(true, true, true);
+	newComponent->SetWorldTransform(FTransform(FRotator::ZeroRotator, pos), false, nullptr, ETeleportType::TeleportPhysics);
+	newComponent->RegisterComponent();
+}
+Chaos::FHeightFieldPtr AClipmapTerrainActor::CreateCollisionChunk(const FIntVector2& key, TArray<uint8>* MaterialIds)
+{
+
+	FRandomTerrainChunk& terrainChunk = Chunks[GetChunk(key.X, key.Y).Index];
+	
+	FVector2D pos = FVector2D(key) * ChunkSize;
+	Chaos::FHeightFieldPtr HeightfieldGeometry = terrainChunk.HeightField;
+	if (!HeightfieldGeometry.IsValid())
+	{
+		int heightFieldSize = ChunkSize + 1;
+		
+		TArray<double> heights;
+		heights.SetNumUninitialized(heightFieldSize * heightFieldSize);
+		double* heightsData = heights.GetData();
+		float* chunkHeights = (float*)terrainChunk.Heightmap[0]->GetPlatformData()->Mips[0].BulkData.Lock(LOCK_READ_WRITE);
+		for (int y = 0; y < ChunkSize; y++)
+		{
+			for (int x = 0; x < ChunkSize; x++)
+			{
+				heightsData[y * heightFieldSize + x] = chunkHeights[y * ChunkSize + x];
+			}
+		}
+		heightsData[ChunkSize * heightFieldSize + ChunkSize] = NoiseNode->GenSingle2D(pos.X + ChunkSize, pos.Y + ChunkSize, Seed);
+		for (int y = 0; y < ChunkSize; y++)
+		{
+			heightsData[y * heightFieldSize + ChunkSize] = NoiseNode->GenSingle2D(pos.X + ChunkSize, pos.Y + y, Seed);
+		}
+		terrainChunk.Heightmap[0]->GetPlatformData()->Mips[0].BulkData.Unlock();
+		if (!MaterialIds)
+		{
+			TArray<uint8> tempIds;
+			tempIds.Add(0);
+			HeightfieldGeometry = terrainChunk.HeightField = Chaos::FHeightFieldPtr(new Chaos::FHeightField(MoveTemp(heights), CopyTemp(tempIds), heightFieldSize, heightFieldSize, Chaos::FVec3f(1.0f)));
+			HeightfieldGeometry->SetScale(FVector(100, 100, HeightScale * 100.0));
+		}
+		else
+		{
+			HeightfieldGeometry = terrainChunk.HeightField = Chaos::FHeightFieldPtr(new Chaos::FHeightField(MoveTemp(heights), CopyTemp(*MaterialIds), heightFieldSize, heightFieldSize, Chaos::FVec3f(1.0f)));
+
+			HeightfieldGeometry->SetScale(FVector(100, 100, HeightScale * 100.0));
+
+		}
+
+	}
+	return HeightfieldGeometry;
+}
 FVector AClipmapTerrainActor::GetLocalCameraLocation() const
 {
 	for (FConstPlayerControllerIterator Iterator = GetWorld()->GetPlayerControllerIterator(); Iterator; ++Iterator)

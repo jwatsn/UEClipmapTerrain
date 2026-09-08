@@ -9,7 +9,7 @@ public class ClipmapTerrain : ModuleRules
 	{
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 	
-		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "EnhancedInput","MeshDescription","StaticMeshDescription", "MeshConversion", "Chaos", "RHI","RenderCore" });
+		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "EnhancedInput","MeshDescription","StaticMeshDescription", "MeshConversion", "Chaos","ChaosCore","PhysicsCore", "RHI","RenderCore" });
 
 		PrivateDependencyModuleNames.AddRange(new string[] {  });
         if (Target.bBuildEditor)
